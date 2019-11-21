@@ -363,7 +363,7 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		56762AC123871E3C000E8501 /* Debug */ = {
+		56762AC123871E3C000E8501 /* DEV */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -421,9 +421,9 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = DEV;
 		};
-		56762AC223871E3C000E8501 /* Release */ = {
+		56762AC223871E3C000E8501 /* STG */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -475,9 +475,9 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
 			};
-			name = Release;
+			name = STG;
 		};
-		56762AC423871E3C000E8501 /* Debug */ = {
+		56762AC423871E3C000E8501 /* DEV */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = DAC7FFEDBF64AF3563EAF957 /* Pods-FisherMan.debug.xcconfig */;
 			buildSettings = {
@@ -485,6 +485,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 224SJKKLQ3;
+				ENV = DEV;
 				INFOPLIST_FILE = FisherMan/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -496,9 +497,9 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Debug;
+			name = DEV;
 		};
-		56762AC523871E3C000E8501 /* Release */ = {
+		56762AC523871E3C000E8501 /* STG */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 44C52F0F0FB73CA1DA147014 /* Pods-FisherMan.release.xcconfig */;
 			buildSettings = {
@@ -506,6 +507,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 224SJKKLQ3;
+				ENV = STG;
 				INFOPLIST_FILE = FisherMan/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -516,7 +518,82 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
-			name = Release;
+			name = STG;
+		};
+		56762AF6238720A9000E8501 /* PROD */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = PROD;
+		};
+		56762AF7238720A9000E8501 /* PROD */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44C52F0F0FB73CA1DA147014 /* Pods-FisherMan.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 224SJKKLQ3;
+				ENV = PROD;
+				INFOPLIST_FILE = FisherMan/Resources/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.GYS.FisherMan;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = PROD;
 		};
 /* End XCBuildConfiguration section */
 
@@ -524,20 +601,22 @@
 		56762AAA23871E3C000E8501 /* Build configuration list for PBXProject "FisherMan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				56762AC123871E3C000E8501 /* Debug */,
-				56762AC223871E3C000E8501 /* Release */,
+				56762AC123871E3C000E8501 /* DEV */,
+				56762AC223871E3C000E8501 /* STG */,
+				56762AF6238720A9000E8501 /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = STG;
 		};
 		56762AC323871E3C000E8501 /* Build configuration list for PBXNativeTarget "FisherMan" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				56762AC423871E3C000E8501 /* Debug */,
-				56762AC523871E3C000E8501 /* Release */,
+				56762AC423871E3C000E8501 /* DEV */,
+				56762AC523871E3C000E8501 /* STG */,
+				56762AF7238720A9000E8501 /* PROD */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = STG;
 		};
 /* End XCConfigurationList section */
 	};
