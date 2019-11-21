@@ -1,0 +1,11 @@
+
+app_identifier("com.simcord.onespace") # The bundle identifier of your app
+apple_id("y.granchenko@gmail.com") # Your Apple email address
+
+itc_team_id("63477801") # iTunes Connect Team ID
+team_id("6UZ9CJ983B") # Developer Portal Team ID
+
+
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
