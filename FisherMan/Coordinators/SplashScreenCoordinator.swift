@@ -23,6 +23,7 @@ class SplashScreenCoordinator: BaseCoordinator<Void> {
         let viewModel = SplashScreenViewModel(dependencies: dependencies)
         let viewController = SplashScreenViewController.instantiate(with: viewModel)
         let rootViewController = UINavigationController(rootViewController: viewController)
+        rootViewController.isNavigationBarHidden = true
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         

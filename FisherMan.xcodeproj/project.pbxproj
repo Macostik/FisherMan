@@ -56,6 +56,9 @@
 		56762AE123872025000E8501 /* SlimLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlimLogger.swift; sourceTree = "<group>"; };
 		56762AE223872025000E8501 /* SlimLoggerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlimLoggerConfig.swift; sourceTree = "<group>"; };
 		DAC7FFEDBF64AF3563EAF957 /* Pods-FisherMan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.debug.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.debug.xcconfig"; sourceTree = "<group>"; };
+		E61563E446FE8E2A850A2327 /* Pods-FisherMan.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.dev.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.dev.xcconfig"; sourceTree = "<group>"; };
+		EC6F8BA18619355B35AE7A0F /* Pods-FisherMan.stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.stg.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.stg.xcconfig"; sourceTree = "<group>"; };
+		FEDDBF03E63126229B92D144 /* Pods-FisherMan.prod.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.prod.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.prod.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +196,9 @@
 			children = (
 				DAC7FFEDBF64AF3563EAF957 /* Pods-FisherMan.debug.xcconfig */,
 				44C52F0F0FB73CA1DA147014 /* Pods-FisherMan.release.xcconfig */,
+				E61563E446FE8E2A850A2327 /* Pods-FisherMan.dev.xcconfig */,
+				EC6F8BA18619355B35AE7A0F /* Pods-FisherMan.stg.xcconfig */,
+				FEDDBF03E63126229B92D144 /* Pods-FisherMan.prod.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -479,7 +485,7 @@
 		};
 		56762AC423871E3C000E8501 /* DEV */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = DAC7FFEDBF64AF3563EAF957 /* Pods-FisherMan.debug.xcconfig */;
+			baseConfigurationReference = E61563E446FE8E2A850A2327 /* Pods-FisherMan.dev.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -501,7 +507,7 @@
 		};
 		56762AC523871E3C000E8501 /* STG */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44C52F0F0FB73CA1DA147014 /* Pods-FisherMan.release.xcconfig */;
+			baseConfigurationReference = EC6F8BA18619355B35AE7A0F /* Pods-FisherMan.stg.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -576,7 +582,7 @@
 		};
 		56762AF7238720A9000E8501 /* PROD */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 44C52F0F0FB73CA1DA147014 /* Pods-FisherMan.release.xcconfig */;
+			baseConfigurationReference = FEDDBF03E63126229B92D144 /* Pods-FisherMan.prod.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
