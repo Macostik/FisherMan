@@ -28,14 +28,14 @@ class SplashScreenViewController: BaseViewController<SplashScreenViewModel> {
     
     private let fisherManLabel = specify(UILabel(), {
         $0.text = "Fisher Man"
-        $0.textColor = #colorLiteral(red: 0.6666666667, green: 0.6666666667, blue: 0.6666666667, alpha: 1)
-        $0.font = UIFont.systemFont(ofSize: 28)
+        $0.textColor = .systemBackground
+        $0.font = UIFont.systemFont(ofSize: 60, weight: .heavy)
     })
     
     private let copyrightLabel = specify(UILabel(), {
         let currentYear = Calendar.current.component(.year, from: Date())
         $0.text = "Copyright © 2019 - \(currentYear), GYS"
-        $0.textColor = #colorLiteral(red: 0.7254901961, green: 0.7254901961, blue: 0.7254901961, alpha: 1)
+        $0.textColor = .systemBackground
         $0.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         $0.textAlignment = .center
     })

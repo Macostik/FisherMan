@@ -81,6 +81,10 @@ class BaseViewController<T: BaseViewModel<BaseModel>>: UIViewController, ViewMod
         super.viewDidDisappear(animated)
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     deinit {
         Logger.info("\(NSStringFromClass(type(of: self))) deinit")
     }
