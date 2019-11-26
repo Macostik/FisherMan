@@ -262,10 +262,17 @@ extension Array where Element == LayoutPositionable {
 
 extension UIView {
     
-    func add<T>(_ subView: T, layoutBlock: ((T) -> [LayoutPositionable])) where T: UIView {
+    @discardableResult func add<T>(_ subView: T, layoutBlock: ((T) -> [LayoutPositionable]))
+        -> NSLayoutConstraint? where T: UIView {
+        var returnLayout: NSLayoutConstraint?
         add(subView)
         subView.translatesAutoresizingMaskIntoConstraints = false
-        layoutBlock(subView).forEach({ NSLayoutConstraint.activate($0.layout(subView).compactMap({$0})) })
+        layoutBlock(subView).forEach({ constraint in
+            let layout = constraint.layout(subView).compactMap({$0})
+            returnLayout = layout.last
+            return NSLayoutConstraint.activate(layout)
+        })
+        return returnLayout
     }
     
     func bringSubviewToFront<T>(_ subView: T, layoutBlock: ((T) -> [LayoutPositionable])) where T: UIView {
