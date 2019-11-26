@@ -30,6 +30,7 @@
 		56762AF9238AF51E000E8501 /* NSLayoutConstraint+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56762AF8238AF51E000E8501 /* NSLayoutConstraint+Ext.swift */; };
 		56762AFB238AF5B3000E8501 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56762AFA238AF5B3000E8501 /* UIView+Ext.swift */; };
 		816D7ED91EECED77BDB05C27 /* Pods_FisherMan.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 42B196C22296908FFBAAF7CE /* Pods_FisherMan.framework */; };
+		AC839852238DA9650031E4B7 /* UIDevice+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = AC839851238DA9650031E4B7 /* UIDevice+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,7 @@
 		56762AE223872025000E8501 /* SlimLoggerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlimLoggerConfig.swift; sourceTree = "<group>"; };
 		56762AF8238AF51E000E8501 /* NSLayoutConstraint+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Ext.swift"; sourceTree = "<group>"; };
 		56762AFA238AF5B3000E8501 /* UIView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		AC839851238DA9650031E4B7 /* UIDevice+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Ext.swift"; sourceTree = "<group>"; };
 		DAC7FFEDBF64AF3563EAF957 /* Pods-FisherMan.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.debug.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.debug.xcconfig"; sourceTree = "<group>"; };
 		E61563E446FE8E2A850A2327 /* Pods-FisherMan.dev.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.dev.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.dev.xcconfig"; sourceTree = "<group>"; };
 		EC6F8BA18619355B35AE7A0F /* Pods-FisherMan.stg.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.stg.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.stg.xcconfig"; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			children = (
 				56762AF8238AF51E000E8501 /* NSLayoutConstraint+Ext.swift */,
 				56762AFA238AF5B3000E8501 /* UIView+Ext.swift */,
+				AC839851238DA9650031E4B7 /* UIDevice+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -377,6 +380,7 @@
 				56762AF023872025000E8501 /* Logger.swift in Sources */,
 				56762AC923872011000E8501 /* SceneDelegate.swift in Sources */,
 				56762AE423872025000E8501 /* Constants.swift in Sources */,
+				AC839852238DA9650031E4B7 /* UIDevice+Ext.swift in Sources */,
 				56762AEC23872025000E8501 /* BaseCoordinator.swift in Sources */,
 				56762AEB23872025000E8501 /* SplashScreenCoordinator.swift in Sources */,
 			);
@@ -519,7 +523,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = TeshPushCounterBitBonSpace_Develop_Provisioning;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = DEV;
 		};
@@ -541,7 +545,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = STG;
 		};
@@ -617,7 +621,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = PROD;
 		};
