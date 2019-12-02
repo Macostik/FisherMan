@@ -35,3 +35,14 @@ open class BaseCoordinator<ResultType> {
         fatalError("Start method should be implemented.")
     }
 }
+
+open class BaseSceneCoordinator<T>: BaseCoordinator<T> {
+    
+    internal let window: UIWindow
+    internal let dependencies: Dependency
+    
+    init(window: UIWindow, dependencies: Dependency) {
+        self.window = window
+        self.dependencies = dependencies
+    }
+}

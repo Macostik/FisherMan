@@ -21,7 +21,7 @@ class AppCoordinator: BaseCoordinator<Void> {
     }
     
     override func start() -> Observable<Void> {
-        let splashCoordinator = SplashScreenCoordinator(window: window, dependencies: dependencies)
+        let splashCoordinator = SplashSceneCoordinator(window: window, dependencies: dependencies)
         return coordinate(to: splashCoordinator)
     }
 }

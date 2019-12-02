@@ -15,8 +15,6 @@ import RxAlamofire
 
 class SplashScreenViewController: BaseViewController<SplashScreenViewModel> {
     
-    private let disposeBag = DisposeBag()
-    
     private let splashSreen: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage(named: "splashScreen")

@@ -53,7 +53,7 @@ class BaseViewController<T: BaseViewModel<BaseModel>>: UIViewController, ViewMod
     var viewModel: T?
     
     var screenName: String = ""
-    fileprivate let disposeBag = DisposeBag()
+    internal let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()

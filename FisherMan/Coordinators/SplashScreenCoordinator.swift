@@ -9,15 +9,7 @@
 import UIKit
 import RxSwift
 
-class SplashScreenCoordinator: BaseCoordinator<Void> {
-    
-    private let window: UIWindow
-    private let dependencies: Dependency
-    
-    init(window: UIWindow, dependencies: Dependency) {
-        self.window = window
-        self.dependencies = dependencies
-    }
+class SplashSceneCoordinator: BaseSceneCoordinator<Void> {
     
     override func start() -> Observable<Void> {
         let viewModel = SplashScreenViewModel(dependencies: dependencies)
