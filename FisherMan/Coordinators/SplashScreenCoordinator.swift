@@ -12,7 +12,7 @@ import RxSwift
 class SplashSceneCoordinator: BaseSceneCoordinator<Void> {
     
     override func start() -> Observable<Void> {
-        let viewModel = SplashScreenViewModel(dependencies: dependencies)
+        let viewModel = SplashSceneViewModel(dependencies: dependencies)
         let viewController = SplashScreenViewController.instantiate(with: viewModel)
         let rootViewController = UINavigationController(rootViewController: viewController)
         rootViewController.isNavigationBarHidden = true
@@ -20,5 +20,10 @@ class SplashSceneCoordinator: BaseSceneCoordinator<Void> {
         window.makeKeyAndVisible()
         
         return Observable.empty()
+    }
+    
+    @discardableResult private func presentMainScene() -> Observable<Void> {
+        let mainCoordinator = MainSceneCoordinator(window: window, dependencies: dependencies)
+        return coordinate(to: mainCoordinator)
     }
 }

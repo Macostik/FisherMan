@@ -8,4 +8,4 @@
 
 import Foundation
 
-final class SplashScreenViewModel: BaseViewModel<BaseModel> {}
+final class SplashSceneViewModel: BaseViewModel<BaseModel> {}

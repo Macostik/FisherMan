@@ -1,4 +1,4 @@
-//  
+//
 //  MainSceneCoordinator.swift
 //  FisherMan
 //
@@ -6,25 +6,25 @@
 //  Copyright © 2019 GYS. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import RxSwift
 
-class MainSceneCoordinator: BaseCoordinator<Void> {
+class MainSceneCoordinator: BaseSceneCoordinator<Void> {
     
     override func start() -> Observable<Void> {
-        let viewModel = MainSceneViewModel(dependencies: dependencies)
-        let viewController = MainSceneViewController.instantiate(with: viewModel)
-        let navigationController = window.rootViewController as? UINavigationController
-        navigationController?.pushViewController(viewController, animated: false)
-        return Observable.just(())
+        let viewModel = SplashSceneViewModel(dependencies: dependencies)
+        let viewController = SplashScreenViewController.instantiate(with: viewModel)
+        let rootViewController = UINavigationController(rootViewController: viewController)
+        rootViewController.isNavigationBarHidden = true
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
+        
+        return Observable.empty()
     }
     
-    @discardableResult private func present<#Class#>Screen(presentingViewController: NewsViewController,
-                                                        newsModel: NewsModel?,
-                                                        isAnimate: Bool) -> Observable<Void> {
-    let <#class#>Coordinator = <#Class#>Coordinator(window: window,
-                                                  dependencies: dependencies)
-        return coordinate(to: detailCoordinator)
+    @discardableResult private func presentMainScene() -> Observable<Void> {
+        let mainCoordinator = MainSceneCoordinator(window: window, dependencies: dependencies)
+        return coordinate(to: mainCoordinator)
     }
 }
-
