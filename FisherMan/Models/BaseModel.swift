@@ -9,4 +9,6 @@
 import Foundation
 import RealmSwift
 
-class BaseModel: Object {}
+class BaseModel: Object {
+    
+}

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		435D80B923A23C2D0018E9C2 /* ImagesPreviewCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D80B523A23C2D0018E9C2 /* ImagesPreviewCoordinator.swift */; };
+		435D80BA23A23C2D0018E9C2 /* ImagesPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D80B623A23C2D0018E9C2 /* ImagesPreviewViewController.swift */; };
+		435D80BB23A23C2D0018E9C2 /* ImagesPreviewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D80B723A23C2D0018E9C2 /* ImagesPreviewModel.swift */; };
+		435D80BC23A23C2D0018E9C2 /* ImagesPreviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 435D80B823A23C2D0018E9C2 /* ImagesPreviewViewModel.swift */; };
 		563C8CE42395A5A4008B8A44 /* MainSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C8CE32395A5A4008B8A44 /* MainSceneCoordinator.swift */; };
 		563C8CE62395A5C5008B8A44 /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C8CE52395A5C5008B8A44 /* MainSceneViewController.swift */; };
 		563C8CE82395A61F008B8A44 /* MainSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C8CE72395A61F008B8A44 /* MainSceneViewModel.swift */; };
@@ -37,6 +41,10 @@
 
 /* Begin PBXFileReference section */
 		42B196C22296908FFBAAF7CE /* Pods_FisherMan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FisherMan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		435D80B523A23C2D0018E9C2 /* ImagesPreviewCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPreviewCoordinator.swift; sourceTree = "<group>"; };
+		435D80B623A23C2D0018E9C2 /* ImagesPreviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPreviewViewController.swift; sourceTree = "<group>"; };
+		435D80B723A23C2D0018E9C2 /* ImagesPreviewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPreviewModel.swift; sourceTree = "<group>"; };
+		435D80B823A23C2D0018E9C2 /* ImagesPreviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagesPreviewViewModel.swift; sourceTree = "<group>"; };
 		44C52F0F0FB73CA1DA147014 /* Pods-FisherMan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.release.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.release.xcconfig"; sourceTree = "<group>"; };
 		563C8CE32395A5A4008B8A44 /* MainSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneCoordinator.swift; sourceTree = "<group>"; };
 		563C8CE52395A5C5008B8A44 /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
@@ -115,6 +123,10 @@
 				56762AD923872025000E8501 /* Services */,
 				56762AD023872025000E8501 /* VeiwModels */,
 				56762ADA23872025000E8501 /* Views */,
+				435D80B523A23C2D0018E9C2 /* ImagesPreviewCoordinator.swift */,
+				435D80B623A23C2D0018E9C2 /* ImagesPreviewViewController.swift */,
+				435D80B723A23C2D0018E9C2 /* ImagesPreviewModel.swift */,
+				435D80B823A23C2D0018E9C2 /* ImagesPreviewViewModel.swift */,
 			);
 			path = FisherMan;
 			sourceTree = "<group>";
@@ -368,12 +380,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				56762AEE23872025000E8501 /* BaseViewController.swift in Sources */,
+				435D80B923A23C2D0018E9C2 /* ImagesPreviewCoordinator.swift in Sources */,
 				56762AE723872025000E8501 /* Dependency.swift in Sources */,
+				435D80BA23A23C2D0018E9C2 /* ImagesPreviewViewController.swift in Sources */,
 				56762AEF23872025000E8501 /* SplashScreenViewController.swift in Sources */,
 				56762ACA23872011000E8501 /* AppDelegate.swift in Sources */,
 				56762AE523872025000E8501 /* Environment.swift in Sources */,
 				56762AF123872025000E8501 /* SlimLogglyDestinationConfig.swift in Sources */,
 				56762AE823872025000E8501 /* BaseViewModel.swift in Sources */,
+				435D80BB23A23C2D0018E9C2 /* ImagesPreviewModel.swift in Sources */,
 				56762AE623872025000E8501 /* ApiManager.swift in Sources */,
 				56762AF223872025000E8501 /* SlimLogglyDestination.swift in Sources */,
 				56762AE923872025000E8501 /* SplashSceneViewModel.swift in Sources */,
@@ -391,6 +406,7 @@
 				56762AEC23872025000E8501 /* BaseCoordinator.swift in Sources */,
 				563C8CE42395A5A4008B8A44 /* MainSceneCoordinator.swift in Sources */,
 				56762AEB23872025000E8501 /* SplashScreenCoordinator.swift in Sources */,
+				435D80BC23A23C2D0018E9C2 /* ImagesPreviewViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

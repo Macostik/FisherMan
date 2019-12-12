@@ -7,5 +7,6 @@
 //
 
 import Foundation
+import RealmSwift
 
 final class MainSceneViewModel: BaseViewModel<BaseModel> {}

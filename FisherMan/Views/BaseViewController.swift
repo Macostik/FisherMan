@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 import RxSwift
 import RxCocoa
+import RealmSwift
 
 let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
     .map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first
@@ -38,8 +39,7 @@ extension BaseInstance where Self: UIViewController & ViewModelBased {
 }
 
 private func performWhenLoaded
-    <T: BaseViewController<BaseViewModel<BaseModel>>>(controller: T,
-                                                      block: @escaping (T) -> Void) {
+    <T: BaseViewController<BaseViewModel<BaseModel>>>(controller: T, block: @escaping (T) -> Void) {
     controller.whenLoaded { [weak controller] in
         if let controller = controller {
             block(controller)

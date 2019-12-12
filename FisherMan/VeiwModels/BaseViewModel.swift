@@ -10,9 +10,10 @@ import Foundation
 import RxSwift
 import RxCocoa
 import Action
+import RealmSwift
 
-class BaseViewModel<T: BaseModel> {
-    
+class BaseViewModel<T> {
+
     public let dependencies: Dependency
 //    public let elements: Driver<T>
 //    public let loadError: Driver<Error>

@@ -7,5 +7,6 @@
 //
 
 import Foundation
+import RealmSwift
 
 final class SplashSceneViewModel: BaseViewModel<BaseModel> {}
