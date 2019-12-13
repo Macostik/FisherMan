@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import RealmSwift
 
-class MainScreenViewController: BaseViewController<MainSceneViewModel> {
+class MainScreenViewController: BaseViewController<Object, MainSceneViewModel> {
     
     override func setupUI() {
-        
+        view.backgroundColor = .white
     }
     
     override func setupBindings() {

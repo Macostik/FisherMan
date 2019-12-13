@@ -9,4 +9,4 @@
 import Foundation
 import RealmSwift
 
-final class MainSceneViewModel: BaseViewModel<BaseModel> {}
+final class MainSceneViewModel: BaseViewModel<Object> {}

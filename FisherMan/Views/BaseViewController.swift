@@ -39,7 +39,7 @@ extension BaseInstance where Self: UIViewController & ViewModelBased {
 }
 
 private func performWhenLoaded
-    <T: BaseViewController<BaseViewModel<BaseModel>>>(controller: T, block: @escaping (T) -> Void) {
+    <O: Object, T: BaseViewController<O, BaseViewModel<O>>>(controller: T, block: @escaping (T) -> Void) {
     controller.whenLoaded { [weak controller] in
         if let controller = controller {
             block(controller)
@@ -47,7 +47,7 @@ private func performWhenLoaded
     }
 }
 
-class BaseViewController<T: BaseViewModel<BaseModel>>: UIViewController, ViewModelBased, BaseInstance {
+class BaseViewController<Element, T: BaseViewModel<Element>>: UIViewController, ViewModelBased, BaseInstance {
     
     typealias ViewModel = T
     var viewModel: T?

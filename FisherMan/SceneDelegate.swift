@@ -11,7 +11,7 @@ import RxSwift
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
-    var window: UIWindow?
+    fileprivate var appCoordinator: AppCoordinator?
     fileprivate let disposeBag = DisposeBag()
     
     func scene(_ scene: UIScene,
@@ -19,9 +19,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                options connectionOptions: UIScene.ConnectionOptions) {
         if let windowScene = scene as? UIWindowScene {
             let window = UIWindow(windowScene: windowScene)
-            self.window = window
-            let appCoordinator = AppCoordinator(window: window)
-            appCoordinator.start().subscribe().disposed(by: disposeBag)
+            let dependencies = Dependency()
+            appCoordinator = AppCoordinator(window: window, dependencies: dependencies)
+            appCoordinator?.start().subscribe().disposed(by: disposeBag)
         }
     }
 

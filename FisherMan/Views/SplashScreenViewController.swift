@@ -12,8 +12,9 @@ import RxCocoa
 import RxRealm
 import RxGesture
 import RxAlamofire
+import RealmSwift
 
-class SplashScreenViewController: BaseViewController<SplashSceneViewModel> {
+class SplashScreenViewController: BaseViewController<Object, SplashSceneViewModel> {
     
     private let splashSreen: UIImageView = {
         let iv = UIImageView()
@@ -48,9 +49,7 @@ class SplashScreenViewController: BaseViewController<SplashSceneViewModel> {
         animateAvatarLayer()
     }
     
-    override func setupBindings() {
-        
-    }
+    override func setupBindings() {}
     
     private func animateAvatarLayer() {
         let imageWidth = 128
@@ -64,14 +63,21 @@ class SplashScreenViewController: BaseViewController<SplashSceneViewModel> {
         view.layer.addSublayer(photoLayer)
         
         let morphAnimation = CABasicAnimation(keyPath: "path")
-        morphAnimation.duration = 0.75
+        morphAnimation.duration = 1.75
         morphAnimation.beginTime = CACurrentMediaTime() + 2.0
         morphAnimation.fillMode = .forwards
         morphAnimation.isRemovedOnCompletion = false
+        morphAnimation.delegate = self
         morphAnimation.toValue = UIBezierPath(ovalIn: CGRect(x: 0,
                                                              y: 0,
                                                              width: imageWidth,
                                                              height: imageWidth)).cgPath
         maskLayer.add(morphAnimation, forKey: nil)
+    }
+}
+
+extension SplashScreenViewController: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        self.viewModel?.animateCompletionObserver.onNext(())
     }
 }

@@ -12,13 +12,13 @@ import RxCocoa
 import Action
 import RealmSwift
 
-class BaseViewModel<T> {
+class BaseViewModel<T: Object> {
 
     public let dependencies: Dependency
 //    public let elements: Driver<T>
 //    public let loadError: Driver<Error>
 //    public let indicatorViewAnimating: Driver<Bool>
-//    
+    
 //    fileprivate let loadAction = Action<Void, T>(enabledIf: Observable.just(true),
 //                                                  workFactory: { return Observable.empty() })
     public let disposeBag = DisposeBag()

@@ -8,5 +8,9 @@
 
 import Foundation
 import RealmSwift
+import RxSwift
+import RxCocoa
 
-final class SplashSceneViewModel: BaseViewModel<BaseModel> {}
+final class SplashSceneViewModel: BaseViewModel<Object> {
+    let animateCompletionObserver = PublishSubject<Void>()
+}

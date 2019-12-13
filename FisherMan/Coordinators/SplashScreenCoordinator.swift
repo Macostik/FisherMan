@@ -16,6 +16,9 @@ class SplashSceneCoordinator: BaseSceneCoordinator<Void> {
         let viewController = SplashScreenViewController.instantiate(with: viewModel)
         let rootViewController = UINavigationController(rootViewController: viewController)
         rootViewController.isNavigationBarHidden = true
+        viewModel.animateCompletionObserver.subscribe(onNext: { [weak self] _ in
+            self?.presentMainScene()
+        }).disposed(by: disposeBag)
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
         

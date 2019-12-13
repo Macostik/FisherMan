@@ -2,7 +2,7 @@
 //  MainSceneCoordinator.swift
 //  FisherMan
 //
-//  Created by Yura Granchenko on 02.12.2019.
+//  Created by Гранченко Юрий on 13.12.2019.
 //  Copyright © 2019 GYS. All rights reserved.
 //
 
@@ -13,8 +13,8 @@ import RxSwift
 class MainSceneCoordinator: BaseSceneCoordinator<Void> {
     
     override func start() -> Observable<Void> {
-        let viewModel = SplashSceneViewModel(dependencies: dependencies)
-        let viewController = SplashScreenViewController.instantiate(with: viewModel)
+        let viewModel = MainSceneViewModel(dependencies: dependencies)
+        let viewController = MainScreenViewController.instantiate(with: viewModel)
         let rootViewController = UINavigationController(rootViewController: viewController)
         rootViewController.isNavigationBarHidden = true
         window.rootViewController = rootViewController
