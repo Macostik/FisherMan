@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		43F99C4623A3D4A1008F6CD4 /* MainSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F99C4523A3D4A1008F6CD4 /* MainSceneCoordinator.swift */; };
 		43F99C4823A3D4DD008F6CD4 /* MainSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F99C4723A3D4DD008F6CD4 /* MainSceneViewController.swift */; };
+		43F99C4E23A3DFA6008F6CD4 /* NewsSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F99C4A23A3DFA6008F6CD4 /* NewsSceneCoordinator.swift */; };
+		43F99C4F23A3DFA6008F6CD4 /* NewsSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F99C4B23A3DFA6008F6CD4 /* NewsSceneViewController.swift */; };
+		43F99C5023A3DFA6008F6CD4 /* NewsSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F99C4C23A3DFA6008F6CD4 /* NewsSceneModel.swift */; };
+		43F99C5123A3DFA6008F6CD4 /* NewsSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F99C4D23A3DFA6008F6CD4 /* NewsSceneViewModel.swift */; };
 		563C8CE82395A61F008B8A44 /* MainSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 563C8CE72395A61F008B8A44 /* MainSceneViewModel.swift */; };
 		56762ABC23871E3C000E8501 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56762ABB23871E3C000E8501 /* Assets.xcassets */; };
 		56762AC923872011000E8501 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56762AC723872011000E8501 /* SceneDelegate.swift */; };
@@ -38,6 +42,10 @@
 		42B196C22296908FFBAAF7CE /* Pods_FisherMan.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_FisherMan.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		43F99C4523A3D4A1008F6CD4 /* MainSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneCoordinator.swift; sourceTree = "<group>"; };
 		43F99C4723A3D4DD008F6CD4 /* MainSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewController.swift; sourceTree = "<group>"; };
+		43F99C4A23A3DFA6008F6CD4 /* NewsSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSceneCoordinator.swift; sourceTree = "<group>"; };
+		43F99C4B23A3DFA6008F6CD4 /* NewsSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSceneViewController.swift; sourceTree = "<group>"; };
+		43F99C4C23A3DFA6008F6CD4 /* NewsSceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSceneModel.swift; sourceTree = "<group>"; };
+		43F99C4D23A3DFA6008F6CD4 /* NewsSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsSceneViewModel.swift; sourceTree = "<group>"; };
 		44C52F0F0FB73CA1DA147014 /* Pods-FisherMan.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-FisherMan.release.xcconfig"; path = "Target Support Files/Pods-FisherMan/Pods-FisherMan.release.xcconfig"; sourceTree = "<group>"; };
 		563C8CE72395A61F008B8A44 /* MainSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneViewModel.swift; sourceTree = "<group>"; };
 		56762AAF23871E3C000E8501 /* FisherMan.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FisherMan.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -138,6 +146,7 @@
 		56762AD023872025000E8501 /* VeiwModels */ = {
 			isa = PBXGroup;
 			children = (
+				43F99C4D23A3DFA6008F6CD4 /* NewsSceneViewModel.swift */,
 				56762AD123872025000E8501 /* BaseViewModel.swift */,
 				56762AD223872025000E8501 /* SplashSceneViewModel.swift */,
 				563C8CE72395A61F008B8A44 /* MainSceneViewModel.swift */,
@@ -148,6 +157,7 @@
 		56762AD323872025000E8501 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
+				43F99C4A23A3DFA6008F6CD4 /* NewsSceneCoordinator.swift */,
 				56762AD423872025000E8501 /* AppCoordinator.swift */,
 				56762AD523872025000E8501 /* SplashScreenCoordinator.swift */,
 				56762AD623872025000E8501 /* BaseCoordinator.swift */,
@@ -159,6 +169,7 @@
 		56762AD723872025000E8501 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				43F99C4C23A3DFA6008F6CD4 /* NewsSceneModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -169,6 +180,7 @@
 				56762AFC238AFE0E000E8501 /* Views */,
 				56762ADB23872025000E8501 /* BaseViewController.swift */,
 				43F99C4723A3D4DD008F6CD4 /* MainSceneViewController.swift */,
+				43F99C4B23A3DFA6008F6CD4 /* NewsSceneViewController.swift */,
 				56762ADC23872025000E8501 /* SplashScreenViewController.swift */,
 			);
 			path = Views;
@@ -368,8 +380,10 @@
 				56762AE723872025000E8501 /* Dependency.swift in Sources */,
 				56762AEF23872025000E8501 /* SplashScreenViewController.swift in Sources */,
 				56762ACA23872011000E8501 /* AppDelegate.swift in Sources */,
+				43F99C4E23A3DFA6008F6CD4 /* NewsSceneCoordinator.swift in Sources */,
 				56762AE523872025000E8501 /* Environment.swift in Sources */,
 				56762AF123872025000E8501 /* SlimLogglyDestinationConfig.swift in Sources */,
+				43F99C5023A3DFA6008F6CD4 /* NewsSceneModel.swift in Sources */,
 				56762AE823872025000E8501 /* BaseViewModel.swift in Sources */,
 				56762AE623872025000E8501 /* ApiManager.swift in Sources */,
 				56762AF223872025000E8501 /* SlimLogglyDestination.swift in Sources */,
@@ -377,8 +391,10 @@
 				56762AFB238AF5B3000E8501 /* UIView+Ext.swift in Sources */,
 				56762AF9238AF51E000E8501 /* NSLayoutConstraint+Ext.swift in Sources */,
 				43F99C4823A3D4DD008F6CD4 /* MainSceneViewController.swift in Sources */,
+				43F99C5123A3DFA6008F6CD4 /* NewsSceneViewModel.swift in Sources */,
 				56762AEA23872025000E8501 /* AppCoordinator.swift in Sources */,
 				56762AF423872025000E8501 /* SlimLoggerConfig.swift in Sources */,
+				43F99C4F23A3DFA6008F6CD4 /* NewsSceneViewController.swift in Sources */,
 				56762AF323872025000E8501 /* SlimLogger.swift in Sources */,
 				56762AF023872025000E8501 /* Logger.swift in Sources */,
 				563C8CE82395A61F008B8A44 /* MainSceneViewModel.swift in Sources */,
