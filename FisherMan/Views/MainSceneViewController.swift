@@ -9,12 +9,13 @@
 import Foundation
 import RealmSwift
 
-class MainScreenViewController: UITabBarController, ViewModelBased, BaseInstance {
+class MainScreenViewController: BaseViewController<MainModel, MainSceneViewModel> {
     
-    typealias ViewModel = MainSceneViewModel
-    var viewModel: ViewModel?
+    override func setupUI() {
+        view.backgroundColor = .white
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func setupBindings() {
+        
     }
 }

@@ -11,16 +11,19 @@ import RxSwift
 
 class NewsSceneCoordinator: BaseSceneCoordinator<UINavigationController> {
     
-    override func start() -> Observable<Void> {
+    override func start() -> Observable<UINavigationController> {
         let viewModel = NewsSceneViewModel(dependencies: dependencies)
         let viewController = NewsSceneViewController.instantiate(with: viewModel)
-        let navigationController = window.rootViewController as? UINavigationController
-        navigationController?.pushViewController(viewController, animated: false)
-        return Observable.just(())
+        let rootViewController = UINavigationController(rootViewController: viewController)
+        rootViewController.isNavigationBarHidden = true
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
+        
+        return Observable<UINavigationController>.just(rootViewController)
     }
     
-//    @discardableResult private func present<#Class#>Scene() -> Observable<Void> {
-//        let <#Class#>Coordinator = <#Class#>SceneCoordinator(window: window, dependencies: dependencies)
-//        return coordinate(to: <#Class#>Coordinator)
-//    }
+    //    @discardableResult private func present<#Class#>Scene() -> Observable<Void> {
+    //        let <#Class#>Coordinator = <#Class#>SceneCoordinator(window: window, dependencies: dependencies)
+    //        return coordinate(to: <#Class#>Coordinator)
+    //    }
 }

@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NewsSceneViewController:  BaseViewController<NewsSceneViewModel> {
+class NewsSceneViewController: BaseViewController<NewsSceneModel, NewsSceneViewModel> {
     
     override func setupUI() {
        
@@ -22,3 +22,5 @@ class NewsSceneViewController:  BaseViewController<NewsSceneViewModel> {
 //        viewModel?.loadError.drive(onNext: {<#drive#>}),
     }
 }
+ 
+ 

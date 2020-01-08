@@ -12,7 +12,7 @@ import RxCocoa
 import Action
 import RealmSwift
 
-class BaseViewModel<T: Object> {
+class BaseViewModel<T> {
 
     public let dependencies: Dependency
 //    public let elements: Driver<T>

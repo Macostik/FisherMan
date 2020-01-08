@@ -16,5 +16,4 @@ final class NewsSceneModel: Object {
     override static func primaryKey() -> String? {
         return "id"
     }
-    
 }

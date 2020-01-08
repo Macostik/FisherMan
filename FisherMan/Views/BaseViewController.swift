@@ -39,7 +39,7 @@ extension BaseInstance where Self: UIViewController & ViewModelBased {
 }
 
 private func performWhenLoaded
-    <O: Object, T: BaseViewController<O, BaseViewModel<O>>>(controller: T, block: @escaping (T) -> Void) {
+    <O, T: BaseViewController<O, BaseViewModel<O>>>(controller: T, block: @escaping (T) -> Void) {
     controller.whenLoaded { [weak controller] in
         if let controller = controller {
             block(controller)
@@ -47,11 +47,11 @@ private func performWhenLoaded
     }
 }
 
-class BaseViewController<Element, T: BaseViewModel<Element>>: UIViewController, ViewModelBased, BaseInstance {
+class BaseViewController<O: Object, T: BaseViewModel<O>>: UIViewController, ViewModelBased, BaseInstance {
     
     typealias ViewModel = T
     var viewModel: T?
-    
+     
     var screenName: String = ""
     internal let disposeBag = DisposeBag()
     
