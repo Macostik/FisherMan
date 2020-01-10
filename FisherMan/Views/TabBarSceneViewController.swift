@@ -1,16 +1,16 @@
 //  
-//  NewsSceneViewController.swift
+//  TabBarSceneViewController.swift
 //  FisherMan
 //
-//  Created by Гранченко Юрий on 13.12.2019.
-//  Copyright © 2019 GYS. All rights reserved.
+//  Created by Гранченко Юрий on 10.01.2020.
+//  Copyright © 2020 GYS. All rights reserved.
 //
 
 import UIKit
 import RxSwift
 import RxCocoa
 
-class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
+class TabBarSceneViewController: BaseViewController<TabBarSceneViewModel> {
     
     override func setupUI() {
        

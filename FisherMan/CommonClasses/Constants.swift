@@ -16,4 +16,7 @@ struct Constants {
     
     // Checking
     static let iOS13Version = ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 13
+    static let screenWidth = UIScreen.main.bounds.width
+    static let screenHeight = UIScreen.main.bounds.height
+    static let mainCollectionViewCell = "mainCollectionViewCell"
 }
