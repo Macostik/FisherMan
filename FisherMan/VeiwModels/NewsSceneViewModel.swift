@@ -8,4 +8,4 @@
 
 import Foundation
 
-final class NewsSceneViewModel : BaseViewModel<NewsSceneModel> {}
+final class NewsSceneViewModel: BaseViewModel<NewsSceneModel> {}

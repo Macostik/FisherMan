@@ -10,7 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class NewsSceneViewController: BaseViewController<NewsSceneModel, NewsSceneViewModel> {
+class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
     
     override func setupUI() {
        

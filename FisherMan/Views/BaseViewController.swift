@@ -17,6 +17,8 @@ let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState 
 let navigationBarHeight = 44 + (keyWindow?.safeAreaInsets.bottom ?? 0)
 let tabBarHeight = 44 + (keyWindow?.safeAreaInsets.bottom ?? 0)
 
+typealias ViewModelItem = BaseViewModel<Object>
+
 protocol ViewModelBased: class {
     associatedtype ViewModel
     var viewModel: ViewModel? { get set }
@@ -39,7 +41,7 @@ extension BaseInstance where Self: UIViewController & ViewModelBased {
 }
 
 private func performWhenLoaded
-    <O, T: BaseViewController<O, BaseViewModel<O>>>(controller: T, block: @escaping (T) -> Void) {
+    <T: BaseViewController<ViewModelItem>>(controller: T, block: @escaping (T) -> Void) {
     controller.whenLoaded { [weak controller] in
         if let controller = controller {
             block(controller)
@@ -47,7 +49,7 @@ private func performWhenLoaded
     }
 }
 
-class BaseViewController<O: Object, T: BaseViewModel<O>>: UIViewController, ViewModelBased, BaseInstance {
+class BaseViewController<T>: UIViewController, ViewModelBased, BaseInstance {
     
     typealias ViewModel = T
     var viewModel: T?

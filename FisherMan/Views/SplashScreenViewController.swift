@@ -14,7 +14,7 @@ import RxGesture
 import RxAlamofire
 import RealmSwift
 
-class SplashScreenViewController: BaseViewController<Object, SplashSceneViewModel> {
+class SplashScreenViewController: BaseViewController<SplashSceneViewModel> {
     
     private let splashSreen: UIImageView = {
         let iv = UIImageView()
