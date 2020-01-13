@@ -9,55 +9,44 @@
 import Foundation
 import UIKit
 
-final class SwipeNavigationAnimator: NSObject, UINavigationControllerDelegate {
+final class PushAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
-    func navigationController(_ navigationController: UINavigationController,
-                                       animationControllerFor operation: UINavigationController.Operation,
-                                       from fromVC: UIViewController,
-                                       to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .pop {
-            return PopAnimation()
-        } else {
-            return PushAnimation()
-        }
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
+        return 0.25
     }
     
-    func navigationController(_ navigationController: UINavigationController,
-                              interactionControllerFor
-        animationController: UIViewControllerAnimatedTransitioning)
-        -> UIViewControllerInteractiveTransitioning? {
-             print (">>print 🚒swipe🚒")
-        return nil
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        if let toView = transitionContext.view(forKey: .to) {
+            transitionContext.containerView.add(toView)
+            toView.alpha = 0
+            let duration = transitionDuration(using: transitionContext)
+            UIView.animate(withDuration: duration, animations: {
+                toView.alpha = 1
+            }) { _ in
+                transitionContext.completeTransition(transitionContext.transitionWasCancelled)
+            }
+        }
     }
 }
 
-class BaseNavigationAnimation: NSObject, UIViewControllerAnimatedTransitioning {
-    
-    fileprivate var toViewController: UIViewController?
-    fileprivate var fromViewConroller: UIViewController?
+
+final class PopAnimation: NSObject, UIViewControllerAnimatedTransitioning {
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 1.0
     }
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        toViewController = transitionContext.viewController(forKey: .to)
-        fromViewConroller = transitionContext.viewController(forKey: .from)
-    }
-}
-
-final class PushAnimation: BaseNavigationAnimation {
-    
-    override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        super.animateTransition(using: transitionContext)
-        
-    }
-}
-
-final class PopAnimation: BaseNavigationAnimation {
-    
-    override func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
-        super.animateTransition(using: transitionContext)
-        
+         if let toView = transitionContext.view(forKey: .to),
+            let fromView = transitionContext.view(forKey: .from) {
+            transitionContext.containerView.insertSubview(toView, belowSubview: fromView)
+            let duration = transitionDuration(using: transitionContext)
+            UIView.animate(withDuration: duration, animations: {
+                fromView.x += 100
+                fromView.alpha = 0
+            }) { _ in
+                transitionContext.completeTransition(transitionContext.transitionWasCancelled)
+            }
+        }
     }
 }

@@ -13,6 +13,7 @@ import RxCocoa
 class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
     
     override func setupUI() {
+        view.backgroundColor = .yellow
        
     }
     

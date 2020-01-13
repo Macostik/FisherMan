@@ -32,6 +32,7 @@ class MainSceneCoordinator: BaseSceneCoordinator<Void> {
         let viewModel = MainSceneViewModel(dependencies: dependencies)
         let viewController = MainScreenViewController.instantiate(with: viewModel)
         baseNavigator.viewControllers.append(viewController)
+        baseNavigator.delegate = viewController
 //        baseNavigator.isNavigationBarHidden = true
        
         return Observable.empty()

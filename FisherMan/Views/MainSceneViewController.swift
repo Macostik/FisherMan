@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 import RxSwift
 import RxCocoa
+import RxGesture
 
 class MainScreenViewController: BaseViewController<MainSceneViewModel> { 
     
@@ -26,6 +27,7 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
                                      forCellWithReuseIdentifier: Constants.mainCollectionViewCell)
         return collectionView
     }()
+    fileprivate var interactiveTransition: UIPercentDrivenInteractiveTransition?
     private let items = Observable.just(["one",  "two"])
     
     override func setupUI() {
@@ -37,6 +39,30 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
                                                    cellType: MainCollectionViewCell.self)) { _, data, cell in
                                                     cell.setupEntry(data)
         }.disposed(by: disposeBag)
+        let leftEdgeGesture = view.rx
+            .screenEdgePanGesture(configuration: { gestureRecognizer, _ in
+                gestureRecognizer.edges = .left
+            })
+        leftEdgeGesture.when(.began)
+            .subscribe(onNext: { [weak self] _ in
+                self?.interactiveTransition = UIPercentDrivenInteractiveTransition()
+                self?.navigationController?.popViewController(animated: true)
+            }) .disposed(by: disposeBag)
+        leftEdgeGesture.when(.changed).asTranslation()
+            .subscribe(onNext: { [unowned self] translate, _ in
+                let percentCompletion = translate.x / self.view.width
+                self.interactiveTransition?.update(percentCompletion)
+            }) .disposed(by: disposeBag)
+        leftEdgeGesture.when(.ended).asTranslation()
+            .subscribe(onNext: {[unowned self] translate, velocity in
+                let percentCompletion = translate.x / self.view.width
+                if (percentCompletion > 0.5 || velocity.x > 0) {
+                    self.interactiveTransition?.finish()
+                } else {
+                    self.interactiveTransition?.cancel()
+                }
+                self.interactiveTransition = nil
+            }).disposed(by: disposeBag)
     }
 }
 
@@ -52,5 +78,26 @@ class MainCollectionViewCell: UICollectionViewCell {
                                                      green: .random(in: 0...1),
                                                      blue: .random(in: 0...1),
                                                      alpha: 1.0)
+    }
+}
+
+extension MainScreenViewController: UINavigationControllerDelegate {
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController,
+                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        if operation == .pop {
+            return PopAnimation()
+        } else {
+            return PushAnimation()
+        }
+    }
+    
+    func navigationController(_ navigationController: UINavigationController,
+                              interactionControllerFor
+        animationController: UIViewControllerAnimatedTransitioning)
+        -> UIViewControllerInteractiveTransitioning? {
+            return self.interactiveTransition
     }
 }
