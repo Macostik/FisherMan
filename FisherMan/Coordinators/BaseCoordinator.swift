@@ -9,6 +9,14 @@
 import RxSwift
 import Foundation
 
+protocol Navigationable {
+    static var baseNavigator: UINavigationController { get }
+}
+
+struct Navigation: Navigationable {
+    static var baseNavigator = UINavigationController()
+}
+
 open class BaseCoordinator<ResultType> {
     
     typealias CoordinationResult = ResultType
@@ -16,6 +24,7 @@ open class BaseCoordinator<ResultType> {
     public let disposeBag = DisposeBag()
     private let identifier = UUID()
     private var childCoordinators = [UUID: Any]()
+    internal var baseNavigator = Navigation.baseNavigator
     
     private func store<T>(coordinator: BaseCoordinator<T>) {
         childCoordinators[coordinator.identifier] = coordinator

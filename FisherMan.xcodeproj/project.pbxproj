@@ -11,6 +11,11 @@
 		43562C6123C8CDAE00996D84 /* TabBarSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43562C5D23C8CDAE00996D84 /* TabBarSceneViewController.swift */; };
 		43562C6223C8CDAE00996D84 /* TabBarSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43562C5E23C8CDAE00996D84 /* TabBarSceneModel.swift */; };
 		43562C6323C8CDAE00996D84 /* TabBarSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43562C5F23C8CDAE00996D84 /* TabBarSceneViewModel.swift */; };
+		4363693423CC655900A620F6 /* CameraSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363693023CC655900A620F6 /* CameraSceneViewController.swift */; };
+		4363693523CC655900A620F6 /* CameraSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363693123CC655900A620F6 /* CameraSceneModel.swift */; };
+		4363693623CC655900A620F6 /* CameraSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363693223CC655900A620F6 /* CameraSceneViewModel.swift */; };
+		4363693723CC666000A620F6 /* CameraSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363692F23CC655900A620F6 /* CameraSceneCoordinator.swift */; };
+		4363693923CC710D00A620F6 /* SwipeNavigationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363693823CC710D00A620F6 /* SwipeNavigationAnimator.swift */; };
 		436A8C4F23C5D06D00F0B44D /* MainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A8C4E23C5D06D00F0B44D /* MainModels.swift */; };
 		436A8C5223C5DF5D00F0B44D /* NewsSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A8C5123C5DF5D00F0B44D /* NewsSceneModel.swift */; };
 		43F99C4623A3D4A1008F6CD4 /* MainSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F99C4523A3D4A1008F6CD4 /* MainSceneCoordinator.swift */; };
@@ -49,6 +54,11 @@
 		43562C5D23C8CDAE00996D84 /* TabBarSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSceneViewController.swift; sourceTree = "<group>"; };
 		43562C5E23C8CDAE00996D84 /* TabBarSceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSceneModel.swift; sourceTree = "<group>"; };
 		43562C5F23C8CDAE00996D84 /* TabBarSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarSceneViewModel.swift; sourceTree = "<group>"; };
+		4363692F23CC655900A620F6 /* CameraSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSceneCoordinator.swift; sourceTree = "<group>"; };
+		4363693023CC655900A620F6 /* CameraSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSceneViewController.swift; sourceTree = "<group>"; };
+		4363693123CC655900A620F6 /* CameraSceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSceneModel.swift; sourceTree = "<group>"; };
+		4363693223CC655900A620F6 /* CameraSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSceneViewModel.swift; sourceTree = "<group>"; };
+		4363693823CC710D00A620F6 /* SwipeNavigationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNavigationAnimator.swift; sourceTree = "<group>"; };
 		436A8C4E23C5D06D00F0B44D /* MainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModels.swift; sourceTree = "<group>"; };
 		436A8C5123C5DF5D00F0B44D /* NewsSceneModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSceneModel.swift; sourceTree = "<group>"; };
 		43F99C4523A3D4A1008F6CD4 /* MainSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneCoordinator.swift; sourceTree = "<group>"; };
@@ -102,6 +112,7 @@
 		43F99C4923A3D51D008F6CD4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				4363693823CC710D00A620F6 /* SwipeNavigationAnimator.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -156,10 +167,11 @@
 		56762AD023872025000E8501 /* VeiwModels */ = {
 			isa = PBXGroup;
 			children = (
-				43F99C4D23A3DFA6008F6CD4 /* NewsSceneViewModel.swift */,
 				56762AD123872025000E8501 /* BaseViewModel.swift */,
-				56762AD223872025000E8501 /* SplashSceneViewModel.swift */,
+				4363693223CC655900A620F6 /* CameraSceneViewModel.swift */,
 				563C8CE72395A61F008B8A44 /* MainSceneViewModel.swift */,
+				43F99C4D23A3DFA6008F6CD4 /* NewsSceneViewModel.swift */,
+				56762AD223872025000E8501 /* SplashSceneViewModel.swift */,
 				43562C5F23C8CDAE00996D84 /* TabBarSceneViewModel.swift */,
 			);
 			path = VeiwModels;
@@ -168,11 +180,12 @@
 		56762AD323872025000E8501 /* Coordinators */ = {
 			isa = PBXGroup;
 			children = (
-				43F99C4A23A3DFA6008F6CD4 /* NewsSceneCoordinator.swift */,
 				56762AD423872025000E8501 /* AppCoordinator.swift */,
-				56762AD523872025000E8501 /* SplashScreenCoordinator.swift */,
 				56762AD623872025000E8501 /* BaseCoordinator.swift */,
+				4363692F23CC655900A620F6 /* CameraSceneCoordinator.swift */,
 				43F99C4523A3D4A1008F6CD4 /* MainSceneCoordinator.swift */,
+				43F99C4A23A3DFA6008F6CD4 /* NewsSceneCoordinator.swift */,
+				56762AD523872025000E8501 /* SplashScreenCoordinator.swift */,
 				43562C5C23C8CDAE00996D84 /* TabBarSceneCoordinator.swift */,
 			);
 			path = Coordinators;
@@ -183,6 +196,7 @@
 			children = (
 				436A8C5123C5DF5D00F0B44D /* NewsSceneModel.swift */,
 				436A8C4E23C5D06D00F0B44D /* MainModels.swift */,
+				4363693123CC655900A620F6 /* CameraSceneModel.swift */,
 				43562C5E23C8CDAE00996D84 /* TabBarSceneModel.swift */,
 			);
 			path = Models;
@@ -193,6 +207,7 @@
 			children = (
 				56762AFC238AFE0E000E8501 /* Views */,
 				56762ADB23872025000E8501 /* BaseViewController.swift */,
+				4363693023CC655900A620F6 /* CameraSceneViewController.swift */,
 				43F99C4723A3D4DD008F6CD4 /* MainSceneViewController.swift */,
 				43F99C4B23A3DFA6008F6CD4 /* NewsSceneViewController.swift */,
 				56762ADC23872025000E8501 /* SplashScreenViewController.swift */,
@@ -401,18 +416,22 @@
 				43562C6023C8CDAE00996D84 /* TabBarSceneCoordinator.swift in Sources */,
 				56762AE523872025000E8501 /* Environment.swift in Sources */,
 				56762AF123872025000E8501 /* SlimLogglyDestinationConfig.swift in Sources */,
+				4363693423CC655900A620F6 /* CameraSceneViewController.swift in Sources */,
 				43562C6123C8CDAE00996D84 /* TabBarSceneViewController.swift in Sources */,
 				56762AE823872025000E8501 /* BaseViewModel.swift in Sources */,
 				56762AE623872025000E8501 /* ApiManager.swift in Sources */,
+				4363693723CC666000A620F6 /* CameraSceneCoordinator.swift in Sources */,
 				56762AF223872025000E8501 /* SlimLogglyDestination.swift in Sources */,
 				56762AE923872025000E8501 /* SplashSceneViewModel.swift in Sources */,
 				56762AFB238AF5B3000E8501 /* UIView+Ext.swift in Sources */,
 				56762AF9238AF51E000E8501 /* NSLayoutConstraint+Ext.swift in Sources */,
 				43F99C4823A3D4DD008F6CD4 /* MainSceneViewController.swift in Sources */,
 				43F99C5123A3DFA6008F6CD4 /* NewsSceneViewModel.swift in Sources */,
+				4363693923CC710D00A620F6 /* SwipeNavigationAnimator.swift in Sources */,
 				56762AEA23872025000E8501 /* AppCoordinator.swift in Sources */,
 				56762AF423872025000E8501 /* SlimLoggerConfig.swift in Sources */,
 				43F99C4F23A3DFA6008F6CD4 /* NewsSceneViewController.swift in Sources */,
+				4363693623CC655900A620F6 /* CameraSceneViewModel.swift in Sources */,
 				56762AF323872025000E8501 /* SlimLogger.swift in Sources */,
 				56762AF023872025000E8501 /* Logger.swift in Sources */,
 				563C8CE82395A61F008B8A44 /* MainSceneViewModel.swift in Sources */,
@@ -422,6 +441,7 @@
 				436A8C4F23C5D06D00F0B44D /* MainModels.swift in Sources */,
 				56762AE423872025000E8501 /* Constants.swift in Sources */,
 				56762AEC23872025000E8501 /* BaseCoordinator.swift in Sources */,
+				4363693523CC655900A620F6 /* CameraSceneModel.swift in Sources */,
 				56762AEB23872025000E8501 /* SplashScreenCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

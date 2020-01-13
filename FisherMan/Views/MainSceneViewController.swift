@@ -16,15 +16,17 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
     private let mainCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: Constants.screenWidth,
-                                 height: Constants.screenHeight - navigationBarHeight)
+        layout.minimumLineSpacing = 0
+        layout.itemSize = UIScreen.main.bounds.size
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isPagingEnabled = true
+        collectionView.bounces = false
+        collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(MainCollectionViewCell.self,
                                      forCellWithReuseIdentifier: Constants.mainCollectionViewCell)
         return collectionView
     }()
-    private let items = Observable.just(["one",  "two", "tree"])
+    private let items = Observable.just(["one",  "two"])
     
     override func setupUI() {
         view.add(mainCollectionView, layoutBlock: { $0.edges() })
