@@ -31,9 +31,15 @@ class MainSceneCoordinator: BaseSceneCoordinator<Void> {
         presentCameraScene()
         let viewModel = MainSceneViewModel(dependencies: dependencies)
         let viewController = MainScreenViewController.instantiate(with: viewModel)
-        baseNavigator.viewControllers.append(viewController)
-        baseNavigator.delegate = viewController
-//        baseNavigator.isNavigationBarHidden = true
+        mainNavigation.viewControllers.append(viewController)
+        mainNavigation.isNavigationBarHidden = true
+        window.rootViewController = mainNavigation
+        window.makeKeyAndVisible()
+        
+        if let cameraVC = mainNavigation.viewControllers.first as? CameraSceneViewController,
+        let mainVC = mainNavigation.viewControllers.last as? MainScreenViewController {
+            cameraVC.mainViewController = mainVC
+        }
        
         return Observable.empty()
     }

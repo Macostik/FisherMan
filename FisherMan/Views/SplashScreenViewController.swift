@@ -63,7 +63,7 @@ class SplashScreenViewController: BaseViewController<SplashSceneViewModel> {
         view.layer.addSublayer(photoLayer)
         
         let morphAnimation = CABasicAnimation(keyPath: "path")
-        morphAnimation.duration = 1.75
+        morphAnimation.duration = 0.25
         morphAnimation.beginTime = CACurrentMediaTime() + 2.0
         morphAnimation.fillMode = .forwards
         morphAnimation.isRemovedOnCompletion = false

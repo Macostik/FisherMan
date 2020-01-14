@@ -21,6 +21,7 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
         layout.itemSize = UIScreen.main.bounds.size
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.isPagingEnabled = true
+        collectionView.showsHorizontalScrollIndicator = false
         collectionView.bounces = false
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(MainCollectionViewCell.self,
@@ -39,24 +40,23 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
                                                    cellType: MainCollectionViewCell.self)) { _, data, cell in
                                                     cell.setupEntry(data)
         }.disposed(by: disposeBag)
-        let leftEdgeGesture = view.rx
-            .screenEdgePanGesture(configuration: { gestureRecognizer, _ in
-                gestureRecognizer.edges = .left
-            })
-        leftEdgeGesture.when(.began)
+        let leftSwipeGesture = view.rx.panGesture()
+        leftSwipeGesture.when(.began)
+            .filter({[unowned self] _ in self.mainCollectionView.contentOffset.x == 0 })
             .subscribe(onNext: { [weak self] _ in
                 self?.interactiveTransition = UIPercentDrivenInteractiveTransition()
+                self?.navigationController?.delegate = self
                 self?.navigationController?.popViewController(animated: true)
             }) .disposed(by: disposeBag)
-        leftEdgeGesture.when(.changed).asTranslation()
+        leftSwipeGesture.when(.changed).asTranslation()
             .subscribe(onNext: { [unowned self] translate, _ in
-                let percentCompletion = translate.x / self.view.width
+                let percentCompletion = translate.x > 10 ? translate.x / self.view.width : 0
                 self.interactiveTransition?.update(percentCompletion)
             }) .disposed(by: disposeBag)
-        leftEdgeGesture.when(.ended).asTranslation()
-            .subscribe(onNext: {[unowned self] translate, velocity in
-                let percentCompletion = translate.x / self.view.width
-                if (percentCompletion > 0.5 || velocity.x > 0) {
+        leftSwipeGesture.when(.ended).asTranslation()
+            .subscribe(onNext: {[unowned self] translate, _ in
+                let percentCompletion = translate.x > 10 ? translate.x / self.view.width : 0
+                if (percentCompletion > 0.5) {
                     self.interactiveTransition?.finish()
                 } else {
                     self.interactiveTransition?.cancel()

@@ -15,10 +15,7 @@ class CameraSceneCoordinator: BaseSceneCoordinator<Void> {
     override func start() -> Observable<Void> {
         let viewModel = CameraSceneViewModel(dependencies: dependencies)
         let viewController = CameraSceneViewController.instantiate(with: viewModel)
-        baseNavigator.viewControllers.append(viewController)
-//        baseNavigator.isNavigationBarHidden = true
-        window.rootViewController = baseNavigator
-        window.makeKeyAndVisible()
+        mainNavigation.viewControllers.append(viewController)
         
         return Observable.just(())
     }
