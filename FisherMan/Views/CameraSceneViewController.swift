@@ -20,17 +20,16 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
         titleLabel.text = "Center"
         view.add(titleLabel, layoutBlock: { $0.center() })
         view.backgroundColor = .yellow
-        navigationController?.delegate = self
     }
     
     override func setupBindings() {
         let rightSwipeGesture = view.rx.panGesture()
         rightSwipeGesture.when(.began)
-            .subscribe(onNext: { [weak self] _ in
-                if let mainViewController = self?.mainViewController {
-                    self?.interactiveTransition = UIPercentDrivenInteractiveTransition()
-//                    self?.transitioningDelegate = self
-                    self?.navigationController?.pushViewController(mainViewController, animated: true)
+            .subscribe(onNext: { [unowned self] _ in
+                if let mainViewController = self.mainViewController {
+                    self.interactiveTransition = UIPercentDrivenInteractiveTransition()
+                    self.navigationController?.delegate = self
+                    self.navigationController?.pushViewController(mainViewController, animated: true)
                 }
             }) .disposed(by: disposeBag)
         rightSwipeGesture.when(.changed).asTranslation()
@@ -47,6 +46,7 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
                     self.interactiveTransition?.cancel()
                 }
                 self.interactiveTransition = nil
+                self.navigationController?.delegate = nil
             }).disposed(by: disposeBag)
     }
 }
