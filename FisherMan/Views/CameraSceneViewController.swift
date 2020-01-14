@@ -20,7 +20,7 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
         titleLabel.text = "Center"
         view.add(titleLabel, layoutBlock: { $0.center() })
         view.backgroundColor = .yellow
-        transitioningDelegate = self
+        navigationController?.delegate = self
     }
     
     override func setupBindings() {
@@ -30,7 +30,7 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
                 if let mainViewController = self?.mainViewController {
                     self?.interactiveTransition = UIPercentDrivenInteractiveTransition()
 //                    self?.transitioningDelegate = self
-//                    self?.navigationController?.pushViewController(mainViewController, animated: false)
+                    self?.navigationController?.pushViewController(mainViewController, animated: true)
                 }
             }) .disposed(by: disposeBag)
         rightSwipeGesture.when(.changed).asTranslation()
@@ -51,15 +51,18 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
     }
 }
 
-extension CameraSceneViewController: UIViewControllerTransitioningDelegate {
+extension CameraSceneViewController: UINavigationControllerDelegate {
     
-    func animationController(forPresented presented: UIViewController,
-                             presenting: UIViewController,
-                             source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PushAnimation()
+    func navigationController(_ navigationController: UINavigationController,
+                              animationControllerFor operation: UINavigationController.Operation,
+                              from fromVC: UIViewController, to toVC: UIViewController)
+        -> UIViewControllerAnimatedTransitioning? {
+            return PushAnimation()
     }
     
-    func interactionControllerForPresentation(using animator: UIViewControllerAnimatedTransitioning)
+    func navigationController(_ navigationController: UINavigationController,
+                              interactionControllerFor
+        animationController: UIViewControllerAnimatedTransitioning)
         -> UIViewControllerInteractiveTransitioning? {
             return interactiveTransition
     }

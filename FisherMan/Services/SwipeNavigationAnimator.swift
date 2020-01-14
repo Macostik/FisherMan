@@ -14,37 +14,36 @@ final class PushAnimation: NSObject, UIViewControllerAnimatedTransitioning {
    fileprivate var propertyAnimator: UIViewPropertyAnimator?
 
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
-        return 5.0
+        return 0.5
     }
 
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let animator = interruptibleAnimator(using: transitionContext)
         animator.startAnimation()
     }
-    
+
     func interruptibleAnimator(using transitionContext: UIViewControllerContextTransitioning)
         -> UIViewImplicitlyAnimating {
             if let propertyAnimator = propertyAnimator {
                 return propertyAnimator
             }
             
-            guard let toView = transitionContext.view(forKey: .to),
-                let fromView = transitionContext.view(forKey: .from)
+            guard let toViewController = transitionContext.viewController(forKey: .to),
+                let toView = transitionContext.view(forKey: .to)
                 else { fatalError() }
-            transitionContext.containerView.insertSubview(toView, aboveSubview: fromView)
-            
-            let startFrame = toView.transform.translatedBy(x: toView.width, y: 0)
-            let endFrame = CGRect(x: 0,
-                                  y: 0,
-                                  width: toView.width,
-                                  height: toView.height)
-            
+            let containerView = transitionContext.containerView
+            containerView.addSubview(toViewController.view)
+
             let duration = transitionDuration(using: transitionContext)
             let animationParam = UICubicTimingParameters(animationCurve: .easeInOut)
-            let animator = UIViewPropertyAnimator(duration: 1.0,
+            let animator = UIViewPropertyAnimator(duration: duration,
                                                   timingParameters: animationParam)
+            
+            toView.frame = transitionContext.finalFrame(for: toViewController)
+            toView.center.x += containerView.width
+            
             animator.addAnimations {
-                toView.transform = .identity
+                toView.center.x -= containerView.width
             }
             animator.addCompletion { (_) in
                 if transitionContext.transitionWasCancelled {
