@@ -15,7 +15,7 @@
 		4363693523CC655900A620F6 /* CameraSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363693123CC655900A620F6 /* CameraSceneModel.swift */; };
 		4363693623CC655900A620F6 /* CameraSceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363693223CC655900A620F6 /* CameraSceneViewModel.swift */; };
 		4363693723CC666000A620F6 /* CameraSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363692F23CC655900A620F6 /* CameraSceneCoordinator.swift */; };
-		4363693923CC710D00A620F6 /* SwipeNavigationAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363693823CC710D00A620F6 /* SwipeNavigationAnimator.swift */; };
+		4363693923CC710D00A620F6 /* InteractionAnimation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4363693823CC710D00A620F6 /* InteractionAnimation.swift */; };
 		436A8C4F23C5D06D00F0B44D /* MainModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A8C4E23C5D06D00F0B44D /* MainModels.swift */; };
 		436A8C5223C5DF5D00F0B44D /* NewsSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 436A8C5123C5DF5D00F0B44D /* NewsSceneModel.swift */; };
 		43F99C4623A3D4A1008F6CD4 /* MainSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43F99C4523A3D4A1008F6CD4 /* MainSceneCoordinator.swift */; };
@@ -58,7 +58,7 @@
 		4363693023CC655900A620F6 /* CameraSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSceneViewController.swift; sourceTree = "<group>"; };
 		4363693123CC655900A620F6 /* CameraSceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSceneModel.swift; sourceTree = "<group>"; };
 		4363693223CC655900A620F6 /* CameraSceneViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraSceneViewModel.swift; sourceTree = "<group>"; };
-		4363693823CC710D00A620F6 /* SwipeNavigationAnimator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeNavigationAnimator.swift; sourceTree = "<group>"; };
+		4363693823CC710D00A620F6 /* InteractionAnimation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractionAnimation.swift; sourceTree = "<group>"; };
 		436A8C4E23C5D06D00F0B44D /* MainModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainModels.swift; sourceTree = "<group>"; };
 		436A8C5123C5DF5D00F0B44D /* NewsSceneModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsSceneModel.swift; sourceTree = "<group>"; };
 		43F99C4523A3D4A1008F6CD4 /* MainSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainSceneCoordinator.swift; sourceTree = "<group>"; };
@@ -112,7 +112,7 @@
 		43F99C4923A3D51D008F6CD4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				4363693823CC710D00A620F6 /* SwipeNavigationAnimator.swift */,
+				4363693823CC710D00A620F6 /* InteractionAnimation.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -427,7 +427,7 @@
 				56762AF9238AF51E000E8501 /* NSLayoutConstraint+Ext.swift in Sources */,
 				43F99C4823A3D4DD008F6CD4 /* MainSceneViewController.swift in Sources */,
 				43F99C5123A3DFA6008F6CD4 /* NewsSceneViewModel.swift in Sources */,
-				4363693923CC710D00A620F6 /* SwipeNavigationAnimator.swift in Sources */,
+				4363693923CC710D00A620F6 /* InteractionAnimation.swift in Sources */,
 				56762AEA23872025000E8501 /* AppCoordinator.swift in Sources */,
 				56762AF423872025000E8501 /* SlimLoggerConfig.swift in Sources */,
 				43F99C4F23A3DFA6008F6CD4 /* NewsSceneViewController.swift in Sources */,

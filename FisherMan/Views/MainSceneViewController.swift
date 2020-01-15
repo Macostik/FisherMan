@@ -87,17 +87,13 @@ extension MainScreenViewController: UINavigationControllerDelegate {
                               animationControllerFor operation: UINavigationController.Operation,
                               from fromVC: UIViewController,
                               to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        if operation == .pop {
-            return PopAnimation()
-        } else {
-            return PushAnimation()
-        }
+        return PopAnimation()
     }
     
     func navigationController(_ navigationController: UINavigationController,
                               interactionControllerFor
         animationController: UIViewControllerAnimatedTransitioning)
         -> UIViewControllerInteractiveTransitioning? {
-            return self.interactiveTransition
+            return interactiveTransition
     }
 }
