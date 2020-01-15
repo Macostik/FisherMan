@@ -18,12 +18,6 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
     private let maximumZoom: CGFloat = 5.0
     private var lastZoomFactor: CGFloat = 1.0
     
-    private let takePhotoButton = specify(UIButton(), {
-        let buttonConfiguration = UIImage.SymbolConfiguration(pointSize: 80, weight: .regular)
-        let cameraImage = UIImage(systemName: "camera.circle", withConfiguration: buttonConfiguration)
-        $0.setImage(cameraImage, for: .normal)
-    })
-    
     private var backCamera: AVCaptureDevice?
     private var frontCamera: AVCaptureDevice?
     private var currentDevice: AVCaptureDevice?
@@ -36,6 +30,17 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
         capture.sessionPreset = AVCaptureSession.Preset.photo
         return capture
     }()
+    
+    private let takePhotoButton = specify(UIButton(), {
+           let buttonConfiguration = UIImage.SymbolConfiguration(pointSize: 80, weight: .regular)
+           let cameraImage = UIImage(systemName: "camera.circle", withConfiguration: buttonConfiguration)
+           $0.setImage(cameraImage, for: .normal)
+       })
+       private let cameraRotateButton = specify(UIButton(), {
+           let buttonConfiguration = UIImage.SymbolConfiguration(pointSize: 25, weight: .regular)
+           let cameraImage = UIImage(systemName: "camera.rotate", withConfiguration: buttonConfiguration)
+           $0.setImage(cameraImage, for: .normal)
+       })
     
     override func setupUI() {
         backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
@@ -62,26 +67,11 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
         } catch {
             Logger.error(error)
         }
+        view.add(cameraRotateButton, layoutBlock: { $0.top(30).trailing(20) })
         view.add(takePhotoButton, layoutBlock: { $0.bottom(50).centerX() })
     }
     
     override func setupBindings() {
-        view.rx.swipeGesture(.up).when(.recognized)
-            .subscribe(onNext: { [unowned self] _ in
-                self.captureSession.beginConfiguration()
-                self.currentDevice = self.toggledCamera ? self.backCamera : self.frontCamera
-                self.toggledCamera = !self.toggledCamera
-                self.captureSession.inputs.forEach { self.captureSession.removeInput($0) }
-                do {
-                    let newInput = try AVCaptureDeviceInput(device: self.currentDevice!)
-                    if self.captureSession.canAddInput(newInput) {
-                        self.captureSession.addInput(newInput)
-                    }
-                } catch {
-                    Logger.error(error)
-                }
-                self.captureSession.commitConfiguration()
-            }).disposed(by: disposeBag)
         view.rx.swipeGesture(.right).when(.recognized)
             .subscribe(onNext: { [unowned self] _ in
                 if let zoomInFactor = self.currentDevice?.videoZoomFactor {
@@ -142,6 +132,21 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
         takePhotoButton.rx.tap.subscribe(onNext: { [unowned self] in
             let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
             self.stillImageOutput.capturePhoto(with: settings, delegate: self)
+        }).disposed(by: disposeBag)
+        cameraRotateButton.rx.tap.subscribe(onNext: { [unowned self] in
+            self.captureSession.beginConfiguration()
+            self.currentDevice = self.toggledCamera ? self.backCamera : self.frontCamera
+            self.toggledCamera = !self.toggledCamera
+            self.captureSession.inputs.forEach { self.captureSession.removeInput($0) }
+            do {
+                let newInput = try AVCaptureDeviceInput(device: self.currentDevice!)
+                if self.captureSession.canAddInput(newInput) {
+                    self.captureSession.addInput(newInput)
+                }
+            } catch {
+                Logger.error(error)
+            }
+            self.captureSession.commitConfiguration()
         }).disposed(by: disposeBag)
     }
 }
