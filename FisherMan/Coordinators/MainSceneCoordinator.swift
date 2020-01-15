@@ -28,24 +28,15 @@ enum SectionTab: String, CaseIterable {
 class MainSceneCoordinator: BaseSceneCoordinator<Void> {
     
     override func start() -> Observable<Void> {
-        presentCameraScene()
         let viewModel = MainSceneViewModel(dependencies: dependencies)
         let viewController = MainScreenViewController.instantiate(with: viewModel)
-        mainNavigation.viewControllers.append(viewController)
-        mainNavigation.isNavigationBarHidden = true
-        window.rootViewController = mainNavigation
+        let mainNavigationController = dependencies.mainNavigationController
+        mainNavigationController.viewControllers.append(viewController)
+        mainNavigationController.handleInteraction()
+        mainNavigationController.isNavigationBarHidden = true
+        window.rootViewController = mainNavigationController
         window.makeKeyAndVisible()
         
-        if let cameraVC = mainNavigation.viewControllers.first as? CameraSceneViewController,
-        let mainVC = mainNavigation.viewControllers.last as? MainScreenViewController {
-            cameraVC.mainViewController = mainVC
-        }
-       
         return Observable.empty()
-    }
-    
-    @discardableResult private func presentCameraScene() -> Observable<Void> {
-        let cameraCoordinator = CameraSceneCoordinator(window: window, dependencies: dependencies)
-        return coordinate(to: cameraCoordinator)
     }
 }

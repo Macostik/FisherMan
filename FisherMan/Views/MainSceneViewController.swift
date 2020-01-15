@@ -28,7 +28,6 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
                                      forCellWithReuseIdentifier: Constants.mainCollectionViewCell)
         return collectionView
     }()
-    fileprivate var interactiveTransition: UIPercentDrivenInteractiveTransition?
     private let items = Observable.just(["one",  "two"])
     
     override func setupUI() {
@@ -40,29 +39,6 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
                                                    cellType: MainCollectionViewCell.self)) { _, data, cell in
                                                     cell.setupEntry(data)
         }.disposed(by: disposeBag)
-        let leftSwipeGesture = view.rx.panGesture()
-        leftSwipeGesture.when(.began)
-            .filter({[unowned self] _ in self.mainCollectionView.contentOffset.x == 0 })
-            .subscribe(onNext: { [weak self] _ in
-                self?.interactiveTransition = UIPercentDrivenInteractiveTransition()
-                self?.navigationController?.delegate = self
-                self?.navigationController?.popViewController(animated: true)
-            }) .disposed(by: disposeBag)
-        leftSwipeGesture.when(.changed).asTranslation()
-            .subscribe(onNext: { [unowned self] translate, _ in
-                let percentCompletion = translate.x > 10 ? translate.x / self.view.width : 0
-                self.interactiveTransition?.update(percentCompletion)
-            }) .disposed(by: disposeBag)
-        leftSwipeGesture.when(.ended).asTranslation()
-            .subscribe(onNext: {[unowned self] translate, _ in
-                let percentCompletion = translate.x > 10 ? translate.x / self.view.width : 0
-                if (percentCompletion > 0.5) {
-                    self.interactiveTransition?.finish()
-                } else {
-                    self.interactiveTransition?.cancel()
-                }
-                self.interactiveTransition = nil
-            }).disposed(by: disposeBag)
     }
 }
 
@@ -78,22 +54,5 @@ class MainCollectionViewCell: UICollectionViewCell {
                                                      green: .random(in: 0...1),
                                                      blue: .random(in: 0...1),
                                                      alpha: 1.0)
-    }
-}
-
-extension MainScreenViewController: UINavigationControllerDelegate {
-    
-    func navigationController(_ navigationController: UINavigationController,
-                              animationControllerFor operation: UINavigationController.Operation,
-                              from fromVC: UIViewController,
-                              to toVC: UIViewController) -> UIViewControllerAnimatedTransitioning? {
-        return PopAnimation()
-    }
-    
-    func navigationController(_ navigationController: UINavigationController,
-                              interactionControllerFor
-        animationController: UIViewControllerAnimatedTransitioning)
-        -> UIViewControllerInteractiveTransitioning? {
-            return interactiveTransition
     }
 }

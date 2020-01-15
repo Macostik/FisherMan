@@ -8,4 +8,6 @@
 
 import Foundation
 
-class Dependency {}
+class Dependency {
+    let mainNavigationController = InteractionNavigationController()
+}

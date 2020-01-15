@@ -17,7 +17,7 @@ class SplashSceneCoordinator: BaseSceneCoordinator<Void> {
         let rootViewController = UINavigationController(rootViewController: viewController)
         rootViewController.isNavigationBarHidden = true
         viewModel.animateCompletionObserver.subscribe(onNext: { [weak self] _ in
-            self?.presentMainScene()
+            self?.presentCameraScene()
         }).disposed(by: disposeBag)
         window.rootViewController = rootViewController
         window.makeKeyAndVisible()
@@ -25,8 +25,8 @@ class SplashSceneCoordinator: BaseSceneCoordinator<Void> {
         return Observable.empty()
     }
     
-    @discardableResult private func presentMainScene() -> Observable<Void> {
-        let mainCoordinator = MainSceneCoordinator(window: window, dependencies: dependencies)
-        return coordinate(to: mainCoordinator)
+    @discardableResult private func presentCameraScene() -> Observable<Void> {
+        let cameraCoordinator = CameraSceneCoordinator(window: window, dependencies: dependencies)
+        return coordinate(to: cameraCoordinator)
     }
 }
