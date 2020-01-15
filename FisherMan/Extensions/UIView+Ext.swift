@@ -56,14 +56,9 @@ extension UIView {
     
     // MARK: - Regular Animation
     
-    class func performAnimated( animated: Bool, animation: () -> Void) {
+    class func performAnimated( animated: Bool, animation: @escaping () -> Void) {
         if animated {
-            UIView.beginAnimations(nil, context: nil)
-            UIView.setAnimationBeginsFromCurrentState(true)
-        }
-        animation()
-        if animated {
-            UIView.commitAnimations()
+            UIView.animate(withDuration: 0.25, animations: animation)
         }
     }
     

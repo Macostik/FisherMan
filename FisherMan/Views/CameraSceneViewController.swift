@@ -12,17 +12,22 @@ import RxCocoa
 import AVFoundation
 
 class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
-
+    
     private var toggledCamera = false
     private let minimumZoom: CGFloat = 1.0
     private let maximumZoom: CGFloat = 5.0
     private var lastZoomFactor: CGFloat = 1.0
     
+    private let takePhotoButton = specify(UIButton(), {
+        let buttonConfiguration = UIImage.SymbolConfiguration(pointSize: 80, weight: .regular)
+        let cameraImage = UIImage(systemName: "camera.circle", withConfiguration: buttonConfiguration)
+        $0.setImage(cameraImage, for: .normal)
+    })
+    
     private var backCamera: AVCaptureDevice?
     private var frontCamera: AVCaptureDevice?
     private var currentDevice: AVCaptureDevice?
-
-    private var stillImage: UIImage?
+    
     private var stillImageOutput = AVCapturePhotoOutput()
     private var cameraPreviewLayer: AVCaptureVideoPreviewLayer?
     
@@ -33,30 +38,31 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
     }()
     
     override func setupUI() {
-          backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
-              frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
-              currentDevice = backCamera
-              do {
-                  let captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice!)
-                  if captureSession.canAddInput(captureDeviceInput) {
-                      captureSession.addInput(captureDeviceInput)
-                      
-                      if captureSession.canAddOutput(stillImageOutput) {
-                          captureSession.addOutput(stillImageOutput)
-                          cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
-                          view.layer.addSublayer(cameraPreviewLayer!)
-                          cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
-                          cameraPreviewLayer?.frame = view.layer.frame
-                          captureSession.startRunning()
-                      } else {
-                          Logger.error("captureSession can't add output")
-                      }
-                  } else {
-                      Logger.error("captureSession can't add input")
-                  }
-              } catch {
-                  Logger.error(error)
-              }
+        backCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .back)
+        frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
+        currentDevice = backCamera
+        do {
+            let captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice!)
+            if captureSession.canAddInput(captureDeviceInput) {
+                captureSession.addInput(captureDeviceInput)
+                
+                if captureSession.canAddOutput(stillImageOutput) {
+                    captureSession.addOutput(stillImageOutput)
+                    cameraPreviewLayer = AVCaptureVideoPreviewLayer(session: captureSession)
+                    view.layer.addSublayer(cameraPreviewLayer!)
+                    cameraPreviewLayer?.videoGravity = AVLayerVideoGravity.resizeAspectFill
+                    cameraPreviewLayer?.frame = view.layer.frame
+                    captureSession.startRunning()
+                } else {
+                    Logger.error("captureSession can't add output")
+                }
+            } else {
+                Logger.error("captureSession can't add input")
+            }
+        } catch {
+            Logger.error(error)
+        }
+        view.add(takePhotoButton, layoutBlock: { $0.bottom(50).centerX() })
     }
     
     override func setupBindings() {
@@ -92,20 +98,20 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
                 }
             }).disposed(by: disposeBag)
         view.rx.swipeGesture(.left).when(.recognized)
-                   .subscribe(onNext: { [unowned self] _ in
-                    if let zoomOutFactor = self.currentDevice?.videoZoomFactor {
-                           if zoomOutFactor > 1.0 {
-                               let newZoomOutFactor = max(zoomOutFactor - 1.0, 1.0)
-                               do {
-                                try self.currentDevice?.lockForConfiguration()
-                                self.currentDevice?.ramp(toVideoZoomFactor: newZoomOutFactor, withRate: 1.0)
-                                self.currentDevice?.unlockForConfiguration()
-                               } catch {
-                                   Logger.error(error)
-                               }
-                           }
-                       }
-                   }).disposed(by: disposeBag)
+            .subscribe(onNext: { [unowned self] _ in
+                if let zoomOutFactor = self.currentDevice?.videoZoomFactor {
+                    if zoomOutFactor > 1.0 {
+                        let newZoomOutFactor = max(zoomOutFactor - 1.0, 1.0)
+                        do {
+                            try self.currentDevice?.lockForConfiguration()
+                            self.currentDevice?.ramp(toVideoZoomFactor: newZoomOutFactor, withRate: 1.0)
+                            self.currentDevice?.unlockForConfiguration()
+                        } catch {
+                            Logger.error(error)
+                        }
+                    }
+                }
+            }).disposed(by: disposeBag)
         view.rx.pinchGesture().when(.recognized)
             .subscribe(onNext: { [unowned self] gesture in
                 guard let deviceZoomFactor = self.currentDevice?.videoZoomFactor else { return }
@@ -133,11 +139,10 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
                 default : break
                 }
             }).disposed(by: disposeBag)
-    }
-    
-    @IBAction func capture(_ sender: UIButton) {
-        let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
-        stillImageOutput.capturePhoto(with: settings, delegate: self)
+        takePhotoButton.rx.tap.subscribe(onNext: { [unowned self] in
+            let settings = AVCapturePhotoSettings(format: [AVVideoCodecKey: AVVideoCodecType.jpeg])
+            self.stillImageOutput.capturePhoto(with: settings, delegate: self)
+        }).disposed(by: disposeBag)
     }
 }
 
@@ -148,7 +153,8 @@ extension CameraSceneViewController: AVCapturePhotoCaptureDelegate {
                      error: Error?) {
         if let error = error { print(error.localizedDescription) }
         guard let imageData = photo.fileDataRepresentation() else { return }
-        stillImage = UIImage(data: imageData)
-        performSegue(withIdentifier: "ShowPhoto", sender: self)
+        if let imageToSave = UIImage(data: imageData) {
+            UIImageWriteToSavedPhotosAlbum(imageToSave, nil, nil, nil)
+        }
     }
 }
