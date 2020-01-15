@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import RxSwift
 import RxCocoa
+import AVFoundation
 
 class InteractionNavigationController: UINavigationController, UINavigationControllerDelegate {
     private var interactiveTransition: UIPercentDrivenInteractiveTransition?
@@ -19,7 +20,28 @@ class InteractionNavigationController: UINavigationController, UINavigationContr
         case left, none, right
     }
     
+    private func cameraGranted(completionHandler: @escaping ((Bool) -> Void)) {
+       var isGranted = false
+        switch AVCaptureDevice.authorizationStatus(for: .video) {
+        case .authorized:
+            isGranted = true
+        case .restricted, .denied, .notDetermined:
+            isGranted = false
+        @unknown default:
+            isGranted = false
+        }
+        if !isGranted {
+            AVCaptureDevice.requestAccess(for: .video, completionHandler: completionHandler)
+        } else {
+            completionHandler(isGranted)
+        }
+    }
+    
     public func handleInteraction() {
+        var isAllowShowCamera = false
+            cameraGranted { granted in
+            isAllowShowCamera = granted
+        }
         var panDirection: PanDirection = .none
         let panGesture = view.rx.panGesture(configuration: { _, delegate in
             delegate.simultaneousRecognitionPolicy = .custom { _, otherGestureRecognizer in
@@ -30,6 +52,7 @@ class InteractionNavigationController: UINavigationController, UINavigationContr
             }
         })
         panGesture.when(.began).asTranslation()
+            .filter({ _, _ in return isAllowShowCamera })
             .subscribe(onNext: { [weak self, viewControllers] _, velocity in
                 panDirection = abs(velocity.x) > abs(velocity.y) ? velocity.x > 0 ? .left : .right : .none
                 self?.interactiveTransition = UIPercentDrivenInteractiveTransition()
