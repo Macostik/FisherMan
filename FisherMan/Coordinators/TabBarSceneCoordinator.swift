@@ -15,7 +15,10 @@ class TabBarSceneCoordinator: BaseSceneCoordinator<UIViewController> {
     override func start() -> Observable<UIViewController> {
         let viewModel = TabBarSceneViewModel(dependencies: dependencies)
         let viewController = TabBarSceneViewController.instantiate(with: viewModel)
-        viewModel.items = Observable.combineLatest(configure())
+        Observable.combineLatest(configure())
+            .subscribe(onNext: { viewControllers in
+                viewController.viewControllers = viewControllers
+            }).disposed(by: disposeBag)
         return Observable.just(viewController)
     }
     
@@ -47,14 +50,4 @@ extension TabBarSceneCoordinator {
             }
         }
     }
-    
-//    private func createNavController(viewController: UIViewController, title: String, imageName: String) -> UIViewController {
-//        let navController = UINavigationController(rootViewController: viewController)
-//        navController.tabBarItem.title = title
-//        navController.navigationBar.prefersLargeTitles = true
-//        navController.tabBarItem.image = #imageLiteral(resourceName: "splashAvatar")
-//        viewController.view.backgroundColor = .white
-//        viewController.navigationItem.title = title
-//        return navController
-//    }
 }

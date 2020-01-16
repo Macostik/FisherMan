@@ -16,8 +16,7 @@ class NewsSceneCoordinator: BaseSceneCoordinator<UINavigationController> {
         let viewController = NewsSceneViewController.instantiate(with: viewModel)
         let rootViewController = UINavigationController(rootViewController: viewController)
         rootViewController.isNavigationBarHidden = true
-        window.rootViewController = rootViewController
-        window.makeKeyAndVisible()
+        rootViewController.tabBarItem.title = "title"
         
         return Observable<UINavigationController>.just(rootViewController)
     }
