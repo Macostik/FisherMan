@@ -11,16 +11,16 @@ import RxSwift
 
 class NewsSceneCoordinator: BaseSceneCoordinator<UINavigationController> {
     
-    public var tabBarIcon: UIImage? = nil
+    public var tabBarIcon: UIImage?
     
     override func start() -> Observable<UINavigationController> {
         let viewModel = NewsSceneViewModel(dependencies: dependencies)
         let viewController = NewsSceneViewController.instantiate(with: viewModel)
-        let rootViewController = UINavigationController(rootViewController: viewController)
-        rootViewController.isNavigationBarHidden = true
-        rootViewController.tabBarItem.image = tabBarIcon
+        let navigationController = UINavigationController(rootViewController: viewController)
+        navigationController.isNavigationBarHidden = true
+        navigationController.tabBarItem.image = tabBarIcon
         
-        return Observable<UINavigationController>.just(rootViewController)
+        return Observable<UINavigationController>.just(navigationController)
     }
     
     //    @discardableResult private func present<#Class#>Scene() -> Observable<Void> {
