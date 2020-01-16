@@ -47,7 +47,8 @@ class CameraSceneViewController: BaseViewController<CameraSceneViewModel> {
         frontCamera = AVCaptureDevice.default(.builtInWideAngleCamera, for: .video, position: .front)
         currentDevice = backCamera
         do {
-            let captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice!)
+            guard let currentDevice = currentDevice else { return }
+            let captureDeviceInput = try AVCaptureDeviceInput(device: currentDevice)
             if captureSession.canAddInput(captureDeviceInput) {
                 captureSession.addInput(captureDeviceInput)
                 

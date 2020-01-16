@@ -10,21 +10,6 @@ import Foundation
 import UIKit
 import RxSwift
 
-enum SectionTab: String, CaseIterable {
-    
-    case news = "b"
-    case chat = "P"
-    case pay = "O"
-    
-    var name: String {
-        switch self {
-        case .news: return "tabBar_news"
-        case .chat: return "tabBar_chat"
-        case .pay: return "tabBar_bonPay"
-        }
-    }
-}
-
 class MainSceneCoordinator: BaseSceneCoordinator<Void> {
     
     override func start() -> Observable<Void> {
@@ -34,9 +19,25 @@ class MainSceneCoordinator: BaseSceneCoordinator<Void> {
         mainNavigationController.viewControllers.append(viewController)
         mainNavigationController.handleInteraction()
         mainNavigationController.isNavigationBarHidden = true
+        viewModel.items = Observable.combineLatest(configure())
         window.rootViewController = mainNavigationController
         window.makeKeyAndVisible()
         
         return Observable.empty()
     }
+}
+
+extension MainSceneCoordinator {
+     public func configure() -> [Observable<UIViewController>] {
+           return MainModel.allCases.map {
+               switch $0 {
+               case .home:
+                   let coordinator = TabBarSceneCoordinator(window: window, dependencies: dependencies)
+                   return coordinate(to: coordinator)
+               case .detail:
+                   let coordinator = TabBarSceneCoordinator(window: window, dependencies: dependencies)
+                   return coordinate(to: coordinator)
+               }
+           }
+       }
 }

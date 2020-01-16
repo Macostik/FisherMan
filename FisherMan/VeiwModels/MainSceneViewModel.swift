@@ -8,5 +8,16 @@
 
 import Foundation
 import RealmSwift
+import RxSwift
+import RxCocoa
 
-final class MainSceneViewModel: BaseViewModel<MainModel> {}
+final class MainSceneViewModel: BaseViewModel<[UIViewController]> {
+    
+    public var items: Observable<[UIViewController]>? {
+        willSet {
+            newValue?.asObservable()
+                .subscribe(loadAction.inputs)
+                .disposed(by: disposeBag)
+        }
+    }
+}

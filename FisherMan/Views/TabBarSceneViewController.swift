@@ -10,15 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class TabBarSceneViewController: BaseViewController<TabBarSceneViewModel> {
-    
-    override func setupUI() {
-       
-    }
-    
-    override func setupBindings() {
-//        viewModel?.indicatorViewAnimating.drive(<#drive#>),
-//        viewModel?.elements.drive(<#drive#>),
-//        viewModel?.loadError.drive(onNext: {<#drive#>}),
-    }
+class TabBarSceneViewController<T>: UITabBarController, ViewModelBased, BaseInstance {
+    typealias ViewModel = T
+    var viewModel: T?
 }

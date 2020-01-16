@@ -9,4 +9,7 @@
 import Foundation
 import RealmSwift
 
-class MainModel: Object {}
+enum MainModel: CaseIterable {
+    case home
+    case detail
+}

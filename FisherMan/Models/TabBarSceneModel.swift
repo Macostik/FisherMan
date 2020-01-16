@@ -9,11 +9,11 @@
 import UIKit
 import RealmSwift
 
-final class TabBarSceneModel: Object {
+enum TabBarSceneModel: String, CaseIterable {
     
-    @objc dynamic public var id = 0
-    
-    override static func primaryKey() -> String? {
-        return "id"
-    }
+    case news = "house.fill"
+    case search = "magnifyingglass.circle"
+    case plus = "plus.cirle"
+    case heart = "heart.circle"
+    case profile = "person.circle"
 }
