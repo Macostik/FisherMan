@@ -34,18 +34,23 @@ extension TabBarSceneCoordinator {
             switch $0 {
             case .news:
                 let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
+                coordinator.tabBarIcon = UIImage(systemName: TabBarSceneModel.news.rawValue)
                 return coordinate(to: coordinator)
             case .search:
                 let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
+                coordinator.tabBarIcon = UIImage(systemName: TabBarSceneModel.search.rawValue)
                 return coordinate(to: coordinator)
             case .plus:
                 let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
+                coordinator.tabBarIcon = UIImage(systemName: TabBarSceneModel.plus.rawValue)
                 return coordinate(to: coordinator)
             case .heart:
                 let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
+                coordinator.tabBarIcon = UIImage(systemName: TabBarSceneModel.heart.rawValue)
                 return coordinate(to: coordinator)
             case .profile:
                 let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
+                coordinator.tabBarIcon = UIImage(systemName: TabBarSceneModel.profile.rawValue)
                 return coordinate(to: coordinator)
             }
         }

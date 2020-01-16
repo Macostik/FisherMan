@@ -13,7 +13,7 @@ enum TabBarSceneModel: String, CaseIterable {
     
     case news = "house.fill"
     case search = "magnifyingglass.circle"
-    case plus = "plus.cirle"
+    case plus = "plus.circle"
     case heart = "heart.circle"
     case profile = "person.circle"
 }
