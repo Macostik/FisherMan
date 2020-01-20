@@ -10,18 +10,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class AdditionalSceneCoordinator: BaseSceneCoordinator<UINavigationController> {
+class AdditionalSceneCoordinator: BaseTabBarController<AdditionalSceneViewModel> {
     
-    public var tabBarIcon: UIImage?
-    
-    override func start() -> Observable<UINavigationController> {
-        let viewModel = AdditionalSceneViewModel(dependencies: dependencies)
-        let viewController = AdditionalSceneViewController.instantiate(with: viewModel)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.isNavigationBarHidden = true
-        navigationController.tabBarItem.image = tabBarIcon
-        
-        return Observable<UINavigationController>.just(navigationController)
+   override func controller() -> BaseViewController<AdditionalSceneViewModel> {
+        return AdditionalSceneViewController
+            .instantiate(with: AdditionalSceneViewModel(dependencies: dependencies))
     }
     
     //    @discardableResult private func present<#Class#>Scene() -> Observable<Void> {

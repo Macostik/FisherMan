@@ -10,19 +10,11 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class SearchSceneCoordinator: BaseSceneCoordinator<UINavigationController> {
+class SearchSceneCoordinator: BaseTabBarController<SearchSceneViewModel> {
     
-     public var tabBarIcon: UIImage?
-       
-       override func start() -> Observable<UINavigationController> {
-           let viewModel = SearchSceneViewModel(dependencies: dependencies)
-           let viewController = SearchSceneViewController.instantiate(with: viewModel)
-           let navigationController = UINavigationController(rootViewController: viewController)
-           navigationController.isNavigationBarHidden = true
-           navigationController.tabBarItem.image = tabBarIcon
-           
-           return Observable<UINavigationController>.just(navigationController)
-       }
+    override func controller() -> BaseViewController<SearchSceneViewModel> {
+        return SearchSceneViewController.instantiate(with: SearchSceneViewModel(dependencies: dependencies))
+    }
     
     //    @discardableResult private func present<#Class#>Scene() -> Observable<Void> {
     //        let <#Class#>Coordinator = <#Class#>SceneCoordinator(window: window, dependencies: dependencies)

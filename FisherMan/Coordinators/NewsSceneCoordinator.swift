@@ -8,19 +8,12 @@
 
 import UIKit
 import RxSwift
+import RealmSwift
 
-class NewsSceneCoordinator: BaseSceneCoordinator<UINavigationController> {
+class NewsSceneCoordinator: BaseTabBarController<NewsSceneViewModel> {
     
-    public var tabBarIcon: UIImage?
-    
-    override func start() -> Observable<UINavigationController> {
-        let viewModel = NewsSceneViewModel(dependencies: dependencies)
-        let viewController = NewsSceneViewController.instantiate(with: viewModel)
-        let navigationController = UINavigationController(rootViewController: viewController)
-        navigationController.isNavigationBarHidden = true
-        navigationController.tabBarItem.image = tabBarIcon
-        
-        return Observable<UINavigationController>.just(navigationController)
+    override func controller() -> BaseViewController<NewsSceneViewModel> {
+        return NewsSceneViewController.instantiate(with: NewsSceneViewModel(dependencies: dependencies))
     }
     
     //    @discardableResult private func present<#Class#>Scene() -> Observable<Void> {

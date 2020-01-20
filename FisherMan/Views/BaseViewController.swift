@@ -105,3 +105,19 @@ class BaseViewController<T>: UIViewController, ViewModelBased, BaseInstance {
     
     internal func setupBindings() {}
 }
+
+class BaseTabBarController<C>: BaseSceneCoordinator<UINavigationController> {
+    public var tabBarIcon: UIImage?
+
+    func controller() -> BaseViewController<C> {
+        return BaseViewController<C>()
+    }
+        
+    override func start() -> Observable<UINavigationController> {
+        let navigationController = UINavigationController(rootViewController: controller())
+        navigationController.isNavigationBarHidden = true
+        navigationController.tabBarItem.image = tabBarIcon
+
+        return Observable<UINavigationController>.just(navigationController)
+    }
+}

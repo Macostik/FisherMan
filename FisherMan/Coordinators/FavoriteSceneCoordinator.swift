@@ -10,20 +10,12 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-class FavoriteSceneCoordinator: BaseSceneCoordinator<UINavigationController> {
+class FavoriteSceneCoordinator: BaseTabBarController<FavoriteSceneViewModel> {
     
-    public var tabBarIcon: UIImage?
-       
-       override func start() -> Observable<UINavigationController> {
-           let viewModel = FavoriteSceneViewModel(dependencies: dependencies)
-           let viewController = FavoriteSceneViewController.instantiate(with: viewModel)
-           let navigationController = UINavigationController(rootViewController: viewController)
-           navigationController.isNavigationBarHidden = true
-           navigationController.tabBarItem.image = tabBarIcon
-           
-           return Observable<UINavigationController>.just(navigationController)
-       }
-    
+    override func controller() -> BaseViewController<FavoriteSceneViewModel> {
+        return FavoriteSceneViewController
+            .instantiate(with: FavoriteSceneViewModel(dependencies: dependencies))
+    }
     //    @discardableResult private func present<#Class#>Scene() -> Observable<Void> {
     //        let <#Class#>Coordinator = <#Class#>SceneCoordinator(window: window, dependencies: dependencies)
     //        return coordinate(to: <#Class#>Coordinator)
