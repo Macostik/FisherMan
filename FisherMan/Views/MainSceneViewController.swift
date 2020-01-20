@@ -25,7 +25,7 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
         collectionView.bounces = false
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(MainCollectionViewCell.self,
-                                     forCellWithReuseIdentifier: Constants.mainCollectionViewCell)
+                                forCellWithReuseIdentifier: Constants.mainCollectionViewCell)
         return collectionView
     }()
     
@@ -35,9 +35,6 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
     
     override func setupBindings() {
         viewModel?.items?.asObservable()
-//        .subscribe(onNext: { vcs in
-//            print (">>print 🚒\(vcs)🚒")
-//            }).disposed(by: disposeBag)
             .bind(to: mainCollectionView.rx.items(cellIdentifier: Constants.mainCollectionViewCell,
                                                   cellType: MainCollectionViewCell.self)) { _, data, cell in
                                                     cell.setupEntry(data)
