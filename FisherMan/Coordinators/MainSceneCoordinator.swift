@@ -31,11 +31,11 @@ extension MainSceneCoordinator {
      public func configure() -> [Observable<UIViewController>] {
            return MainModel.allCases.map {
                switch $0 {
-               case .home:
+               case .main:
                    let coordinator = TabBarSceneCoordinator(window: window, dependencies: dependencies)
                    return coordinate(to: coordinator)
                case .detail:
-                   let coordinator = TabBarSceneCoordinator(window: window, dependencies: dependencies)
+                   let coordinator = DetailSceneCoordinator(window: window, dependencies: dependencies)
                    return coordinate(to: coordinator)
                }
            }

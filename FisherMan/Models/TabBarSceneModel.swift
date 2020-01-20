@@ -18,29 +18,4 @@ enum TabBarSceneModel: String, CaseIterable {
     case plus = "plus.circle"
     case heart = "heart.circle"
     case profile = "person.circle"
-    
-    func coordinator(window: UIWindow, dependencies: Dependency) -> BaseCoordinator<UINavigationController> {
-        switch self {
-        case .news:
-            let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
-            coordinator.tabBarIcon = UIImage(systemName: rawValue)
-            return coordinator
-        case .search:
-            let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
-            coordinator.tabBarIcon = UIImage(systemName: rawValue)
-            return coordinator
-        case .plus:
-            let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
-            coordinator.tabBarIcon = UIImage(systemName: rawValue)
-            return coordinator
-        case .heart:
-            let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
-            coordinator.tabBarIcon = UIImage(systemName: rawValue)
-            return coordinator
-        case .profile:
-            let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
-            coordinator.tabBarIcon = UIImage(systemName: rawValue)
-            return coordinator
-        }
-    }
 }

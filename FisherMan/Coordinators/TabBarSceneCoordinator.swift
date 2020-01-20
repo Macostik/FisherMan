@@ -21,11 +21,6 @@ class TabBarSceneCoordinator: BaseSceneCoordinator<UIViewController> {
             }).disposed(by: disposeBag)
         return Observable.just(viewController)
     }
-    
-//    @discardableResult private func present<#Class#>Scene() -> Observable<Void> {
-//        let <#Class#>Coordinator = <#Class#>SceneCoordinator(window: window, dependencies: dependencies)
-//        return coordinate(to: <#Class#>Coordinator)
-//    }
 }
 
 extension TabBarSceneCoordinator {
@@ -33,4 +28,31 @@ extension TabBarSceneCoordinator {
         return TabBarSceneModel.allCases
             .map {  coordinate(to: $0.coordinator(window: window, dependencies: dependencies)) }
     }
+}
+
+extension TabBarSceneModel {
+    func coordinator(window: UIWindow, dependencies: Dependency) -> BaseCoordinator<UINavigationController> {
+           switch self {
+           case .news:
+               let coordinator = NewsSceneCoordinator(window: window, dependencies: dependencies)
+               coordinator.tabBarIcon = UIImage(systemName: rawValue)
+               return coordinator
+           case .search:
+               let coordinator = SearchSceneCoordinator(window: window, dependencies: dependencies)
+               coordinator.tabBarIcon = UIImage(systemName: rawValue)
+               return coordinator
+           case .plus:
+               let coordinator = AdditionalSceneCoordinator(window: window, dependencies: dependencies)
+               coordinator.tabBarIcon = UIImage(systemName: rawValue)
+               return coordinator
+           case .heart:
+               let coordinator = FavoriteSceneCoordinator(window: window, dependencies: dependencies)
+               coordinator.tabBarIcon = UIImage(systemName: rawValue)
+               return coordinator
+           case .profile:
+               let coordinator = ProfileSceneCoordinator(window: window, dependencies: dependencies)
+               coordinator.tabBarIcon = UIImage(systemName: rawValue)
+               return coordinator
+           }
+       }
 }

@@ -10,6 +10,6 @@ import Foundation
 import RealmSwift
 
 enum MainModel: CaseIterable {
-    case home
+    case main
     case detail
 }
