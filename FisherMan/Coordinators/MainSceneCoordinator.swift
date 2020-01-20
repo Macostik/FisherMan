@@ -28,16 +28,19 @@ class MainSceneCoordinator: BaseSceneCoordinator<Void> {
 }
 
 extension MainSceneCoordinator {
-     public func configure() -> [Observable<UIViewController>] {
-           return MainModel.allCases.map {
-               switch $0 {
-               case .main:
-                   let coordinator = TabBarSceneCoordinator(window: window, dependencies: dependencies)
-                   return coordinate(to: coordinator)
-               case .detail:
-                   let coordinator = DetailSceneCoordinator(window: window, dependencies: dependencies)
-                   return coordinate(to: coordinator)
-               }
-           }
-       }
+    public func configure() -> [Observable<UIViewController>] {
+        return MainModel.allCases
+            .map {  coordinate(to: $0.coordinator(window: window, dependencies: dependencies)) }
+    }
+}
+
+extension MainModel {
+    func coordinator(window: UIWindow, dependencies: Dependency) -> BaseCoordinator<UIViewController> {
+        switch self {
+        case .main:
+            return TabBarSceneCoordinator(window: window, dependencies: dependencies)
+        case .detail:
+            return DetailSceneCoordinator(window: window, dependencies: dependencies)
+        }
+    }
 }
