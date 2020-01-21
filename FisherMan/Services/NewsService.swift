@@ -13,7 +13,7 @@ class SplashService: RealmService<NewsSceneModel> {
     
     public func getAllNews(completion: (() -> Void)? = nil) {
         var newsList = [NewsSceneModel]()
-        APIManager.allNews(["serviceId" : Constants.serviceID,
+        APIManager.allNews(["serviceId": Constants.serviceID,
                             "localizationsShortNames": [Localable.ru.rawValue, Localable.en.rawValue]])
         .json().subscribe(onNext: { json in
             do {

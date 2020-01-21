@@ -66,4 +66,3 @@ final class LanguageManager {
         return locale == .ru
     }
 }
-

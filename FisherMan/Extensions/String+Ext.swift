@@ -158,7 +158,7 @@ extension String {
         var pureNumber = self.replacingOccurrences( of: "[^0-9]", with: "", options: .regularExpression)
         for index in 0 ..< pattern.count {
             guard index < pureNumber.count else { return pureNumber }
-            let stringIndex = String.Index(encodedOffset: index)
+            let stringIndex = String.Index(utf16Offset: index, in: self)
             let patternCharacter = pattern[stringIndex]
             guard patternCharacter != replacmentCharacter else { continue }
             pureNumber.insert(patternCharacter, at: stringIndex)
@@ -180,7 +180,7 @@ extension String {
             !range.isEmpty {
                 if !isSearhing && string.contains("Bit") {
                     let _index = index(range.upperBound, offsetBy: 0)
-                    if _index.encodedOffset < self.count, self[_index] == "b" {
+                    if _index.utf16Offset(in: self) < self.count, self[_index] == "b" {
                         let index = distance(from: startIndex, to: range.lowerBound)
                         indexes.append(index)
                     }
