@@ -13,7 +13,7 @@ import RxCocoa
 class ProfileSceneViewController: BaseViewController<ProfileSceneViewModel> {
     
     override func setupUI() {
-       
+       view.backgroundColor = .green
     }
     
     override func setupBindings() {

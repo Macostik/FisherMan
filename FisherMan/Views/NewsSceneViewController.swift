@@ -13,7 +13,7 @@ import RxCocoa
 class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
     
     override func setupUI() {
-       
+        view.backgroundColor = .blue
     }
     
     override func setupBindings() {

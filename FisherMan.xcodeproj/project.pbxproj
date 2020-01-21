@@ -46,6 +46,11 @@
 		56762AF423872025000E8501 /* SlimLoggerConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56762AE223872025000E8501 /* SlimLoggerConfig.swift */; };
 		56762AF9238AF51E000E8501 /* NSLayoutConstraint+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56762AF8238AF51E000E8501 /* NSLayoutConstraint+Ext.swift */; };
 		56762AFB238AF5B3000E8501 /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56762AFA238AF5B3000E8501 /* UIView+Ext.swift */; };
+		568659F123D6F92000FBB61C /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F023D6F92000FBB61C /* RealmService.swift */; };
+		568659F323D75EED00FBB61C /* NewsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F223D75EEC00FBB61C /* NewsService.swift */; };
+		568659F523D75F8400FBB61C /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F423D75F8400FBB61C /* LanguageManager.swift */; };
+		568659F723D75FBA00FBB61C /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F623D75FBA00FBB61C /* LanguageModel.swift */; };
+		568659F923D761E200FBB61C /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F823D761E200FBB61C /* String+Ext.swift */; };
 		56B9F7E423D59BD200C03F5E /* DetailSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E023D59BD200C03F5E /* DetailSceneCoordinator.swift */; };
 		56B9F7E523D59BD200C03F5E /* DetailSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E123D59BD200C03F5E /* DetailSceneViewController.swift */; };
 		56B9F7E623D59BD200C03F5E /* DetailSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E223D59BD200C03F5E /* DetailSceneModel.swift */; };
@@ -113,6 +118,11 @@
 		56762AE223872025000E8501 /* SlimLoggerConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlimLoggerConfig.swift; sourceTree = "<group>"; };
 		56762AF8238AF51E000E8501 /* NSLayoutConstraint+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSLayoutConstraint+Ext.swift"; sourceTree = "<group>"; };
 		56762AFA238AF5B3000E8501 /* UIView+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
+		568659F023D6F92000FBB61C /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
+		568659F223D75EEC00FBB61C /* NewsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsService.swift; sourceTree = "<group>"; };
+		568659F423D75F8400FBB61C /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		568659F623D75FBA00FBB61C /* LanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
+		568659F823D761E200FBB61C /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		56B9F7E023D59BD200C03F5E /* DetailSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneCoordinator.swift; sourceTree = "<group>"; };
 		56B9F7E123D59BD200C03F5E /* DetailSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneViewController.swift; sourceTree = "<group>"; };
 		56B9F7E223D59BD200C03F5E /* DetailSceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneModel.swift; sourceTree = "<group>"; };
@@ -156,6 +166,8 @@
 			children = (
 				4363693823CC710D00A620F6 /* InteractionAnimation.swift */,
 				436160B823CF2CCB0045AB81 /* InteractionNavigationController.swift */,
+				568659F023D6F92000FBB61C /* RealmService.swift */,
+				568659F223D75EEC00FBB61C /* NewsService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -204,6 +216,7 @@
 				56762ACD23872024000E8501 /* Environment.swift */,
 				56762ACE23872024000E8501 /* ApiManager.swift */,
 				56762ACF23872024000E8501 /* Dependency.swift */,
+				568659F423D75F8400FBB61C /* LanguageManager.swift */,
 			);
 			path = CommonClasses;
 			sourceTree = "<group>";
@@ -257,6 +270,7 @@
 				436A8C5123C5DF5D00F0B44D /* NewsSceneModel.swift */,
 				56B9F7EA23D59D6600C03F5E /* SearchSceneModel.swift */,
 				43562C5E23C8CDAE00996D84 /* TabBarSceneModel.swift */,
+				568659F623D75FBA00FBB61C /* LanguageModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -296,6 +310,7 @@
 			children = (
 				56762AF8238AF51E000E8501 /* NSLayoutConstraint+Ext.swift */,
 				56762AFA238AF5B3000E8501 /* UIView+Ext.swift */,
+				568659F823D761E200FBB61C /* String+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -498,13 +513,18 @@
 				4363693723CC666000A620F6 /* CameraSceneCoordinator.swift in Sources */,
 				56762AF223872025000E8501 /* SlimLogglyDestination.swift in Sources */,
 				436160B923CF2CCB0045AB81 /* InteractionNavigationController.swift in Sources */,
+				568659F523D75F8400FBB61C /* LanguageManager.swift in Sources */,
 				56762AE923872025000E8501 /* SplashSceneViewModel.swift in Sources */,
+				568659F323D75EED00FBB61C /* NewsService.swift in Sources */,
 				56762AFB238AF5B3000E8501 /* UIView+Ext.swift in Sources */,
 				56B9F7EF23D59D6600C03F5E /* SearchSceneViewModel.swift in Sources */,
 				56762AF9238AF51E000E8501 /* NSLayoutConstraint+Ext.swift in Sources */,
 				56B9F80723D5A21300C03F5E /* ProfileSceneViewModel.swift in Sources */,
+				568659F923D761E200FBB61C /* String+Ext.swift in Sources */,
 				43F99C4823A3D4DD008F6CD4 /* MainSceneViewController.swift in Sources */,
+				568659F123D6F92000FBB61C /* RealmService.swift in Sources */,
 				43F99C5123A3DFA6008F6CD4 /* NewsSceneViewModel.swift in Sources */,
+				568659F723D75FBA00FBB61C /* LanguageModel.swift in Sources */,
 				56B9F7E723D59BD200C03F5E /* DetailSceneViewModel.swift in Sources */,
 				4363693923CC710D00A620F6 /* InteractionAnimation.swift in Sources */,
 				56762AEA23872025000E8501 /* AppCoordinator.swift in Sources */,

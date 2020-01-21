@@ -31,6 +31,7 @@ extension TabBarSceneCoordinator {
 }
 
 extension TabBarSceneModel {
+    
     func coordinator(window: UIWindow, dependencies: Dependency) -> BaseCoordinator<UINavigationController> {
            switch self {
            case .news:

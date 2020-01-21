@@ -12,11 +12,6 @@ import RxSwift
 import RxCocoa
 import RealmSwift
 
-let keyWindow = UIApplication.shared.connectedScenes.filter({$0.activationState == .foregroundActive})
-    .map({$0 as? UIWindowScene}).compactMap({$0}).first?.windows.filter({$0.isKeyWindow}).first
-let navigationBarHeight = 44 + (keyWindow?.safeAreaInsets.bottom ?? 0)
-let tabBarHeight = 44 + (keyWindow?.safeAreaInsets.bottom ?? 0)
-
 typealias ViewModelItem = BaseViewModel<Object>
 
 protocol ViewModelBased: class {
@@ -73,14 +68,6 @@ class BaseViewController<T>: UIViewController, ViewModelBased, BaseInstance {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         LastVisibleScreen.lastAppearedScreenName = screenName
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {

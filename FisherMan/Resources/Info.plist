@@ -22,6 +22,10 @@
 	<string>${ENV}</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>Accessing your camera</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Accessing photo library</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -49,9 +53,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-    <key>NSCameraUsageDescription</key>
-    <string>Accessing your camera</string>
-    <key>NSPhotoLibraryAddUsageDescription</key>
-    <string>Accessing photo library</string>
 </dict>
 </plist>
