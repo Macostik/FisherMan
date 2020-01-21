@@ -19,6 +19,7 @@ struct Constants {
     static let baseURL = Environment.isProduction ? "http://nps-api-proxy.onespace.prod/api/v1/mobile/news" :
         Environment.isDevelop ? "http://nps-api-proxy.onespace.devel/api/v1/mobile/news" :
     "http://nps-api-proxy.onespace.stg/api/v1/mobile/news"
+    static let groupId = "group.com.GYS.FisherMan"
     
     // Checking
     static let iOS13Version = ProcessInfo.processInfo.operatingSystemVersion.majorVersion >= 13

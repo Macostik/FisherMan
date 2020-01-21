@@ -51,6 +51,7 @@
 		568659F523D75F8400FBB61C /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F423D75F8400FBB61C /* LanguageManager.swift */; };
 		568659F723D75FBA00FBB61C /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F623D75FBA00FBB61C /* LanguageModel.swift */; };
 		568659F923D761E200FBB61C /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F823D761E200FBB61C /* String+Ext.swift */; };
+		568659FC23D7910C00FBB61C /* Path+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659FB23D7910C00FBB61C /* Path+Ext.swift */; };
 		56B9F7E423D59BD200C03F5E /* DetailSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E023D59BD200C03F5E /* DetailSceneCoordinator.swift */; };
 		56B9F7E523D59BD200C03F5E /* DetailSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E123D59BD200C03F5E /* DetailSceneViewController.swift */; };
 		56B9F7E623D59BD200C03F5E /* DetailSceneModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E223D59BD200C03F5E /* DetailSceneModel.swift */; };
@@ -123,6 +124,8 @@
 		568659F423D75F8400FBB61C /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
 		568659F623D75FBA00FBB61C /* LanguageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		568659F823D761E200FBB61C /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		568659FA23D78D1500FBB61C /* FisherManDEV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FisherManDEV.entitlements; sourceTree = "<group>"; };
+		568659FB23D7910C00FBB61C /* Path+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+Ext.swift"; sourceTree = "<group>"; };
 		56B9F7E023D59BD200C03F5E /* DetailSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneCoordinator.swift; sourceTree = "<group>"; };
 		56B9F7E123D59BD200C03F5E /* DetailSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneViewController.swift; sourceTree = "<group>"; };
 		56B9F7E223D59BD200C03F5E /* DetailSceneModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneModel.swift; sourceTree = "<group>"; };
@@ -193,6 +196,7 @@
 		56762AB123871E3C000E8501 /* FisherMan */ = {
 			isa = PBXGroup;
 			children = (
+				568659FA23D78D1500FBB61C /* FisherManDEV.entitlements */,
 				56762AC823872011000E8501 /* AppDelegate.swift */,
 				56762AC723872011000E8501 /* SceneDelegate.swift */,
 				56762ACB23872024000E8501 /* CommonClasses */,
@@ -311,6 +315,7 @@
 				56762AF8238AF51E000E8501 /* NSLayoutConstraint+Ext.swift */,
 				56762AFA238AF5B3000E8501 /* UIView+Ext.swift */,
 				568659F823D761E200FBB61C /* String+Ext.swift */,
+				568659FB23D7910C00FBB61C /* Path+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -502,6 +507,7 @@
 				56762ACA23872011000E8501 /* AppDelegate.swift in Sources */,
 				43F99C4E23A3DFA6008F6CD4 /* NewsSceneCoordinator.swift in Sources */,
 				43562C6023C8CDAE00996D84 /* TabBarSceneCoordinator.swift in Sources */,
+				568659FC23D7910C00FBB61C /* Path+Ext.swift in Sources */,
 				56B9F7EE23D59D6600C03F5E /* SearchSceneModel.swift in Sources */,
 				56762AE523872025000E8501 /* Environment.swift in Sources */,
 				56762AF123872025000E8501 /* SlimLogglyDestinationConfig.swift in Sources */,
@@ -673,6 +679,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = FisherMan/FisherManDEV.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 6UZ9CJ983B;
@@ -697,8 +704,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 6UZ9CJ983B;
 				ENV = STG;
 				INFOPLIST_FILE = FisherMan/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -707,7 +715,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = work.TestPushCounterBitBonSpace;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE_SPECIFIER = TeshPushCounterBitBonSpace_Develop_Provisioning;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
