@@ -33,13 +33,11 @@ public class RealmService<C>: RealmServiceType {
 }
 
 struct RealmProvider {
-  let configuration: Realm.Configuration
+  private let configuration: Realm.Configuration
 
-  internal init(config: Realm.Configuration) {
-    configuration = config
-    }
+  internal init(config: Realm.Configuration) { configuration = config }
     
-    var realm: Realm {
+  public var realm: Realm {
         do {
             return try Realm(configuration: configuration)
         } catch {
@@ -48,9 +46,10 @@ struct RealmProvider {
         }
     }
     
-    @discardableResult static func configureRealm() -> Realm.Configuration {
+    private static func configureRealm() -> Realm.Configuration {
         var config = Realm.Configuration.defaultConfiguration
-        var groupURL = config.fileURL
+        var groupURL = config.fileURL?
+            .deletingLastPathComponent().appendingPathComponent("\(Environment.ENV).realm")
         do {
             groupURL = try Path.inSharedContainer("\(Environment.ENV).realm")
         } catch {
@@ -70,6 +69,8 @@ struct RealmProvider {
         }
         return config
     }
+    
+    public static var shared = RealmProvider(config: configureRealm())
 }
 
 protocol EntryCollection {
@@ -99,13 +100,12 @@ extension Realm {
                                        failBlock: @escaping ((_ error: Swift.Error) -> Void) = {_ in return },
                                        successBlock: @escaping ((Realm, T?) -> Void)) {
         let wrappedObj = ThreadSafeReference(to: obj)
-        let config = RealmProvider.configureRealm()
+        let provider = RealmProvider.shared
         DispatchQueue(label: "background").async {
             autoreleasepool {
                 do {
-                    let realm = try Realm(configuration: config)
+                    let realm = provider.realm
                     let obj = realm.resolve(wrappedObj)
-                    
                     try realm.write {
                         successBlock(realm, obj)
                     }

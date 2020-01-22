@@ -16,7 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions
         launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        RealmProvider.configureRealm()
+        let realm =  RealmProvider.shared.realm
+        print (">>self - \(realm.configuration.fileURL)<<")
         return true
     }
 

@@ -680,18 +680,18 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = FisherMan/FisherManDEV.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yuriy Granchenko (DQHTWY74L6)";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 6UZ9CJ983B;
+				DEVELOPMENT_TEAM = 224SJKKLQ3;
 				ENV = DEV;
 				INFOPLIST_FILE = FisherMan/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = work.TestPushCounterBitBonSpace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GYS.FisherMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = TeshPushCounterBitBonSpace_Develop_Provisioning;
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -704,18 +704,18 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 6UZ9CJ983B;
+				DEVELOPMENT_TEAM = 224SJKKLQ3;
 				ENV = STG;
 				INFOPLIST_FILE = FisherMan/Resources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = work.TestPushCounterBitBonSpace;
+				PRODUCT_BUNDLE_IDENTIFIER = com.GYS.FisherMan;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = TeshPushCounterBitBonSpace_Develop_Provisioning;
+				PROVISIONING_PROFILE_SPECIFIER = "XC iOS: *";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
