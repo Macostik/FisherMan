@@ -12,16 +12,18 @@ import RxCocoa
 import RxRealm
 import RealmSwift
 
+typealias RealmObservable<T> = ([T], RxRealm.RealmChangeset?)
+
 protocol RealmServiceType {
     associatedtype T
-    func observeEntries<T: Object>() -> Observable<([T], RxRealm.RealmChangeset?)>?
+    func observeEntries<T: Object>() -> Observable<(RealmObservable<T>)>?
 }
 
 public class RealmService<C>: RealmServiceType {
     typealias T = C
     internal let disposeBag = DisposeBag()
     
-    public func observeEntries<T: Object>() -> Observable<([T], RxRealm.RealmChangeset?)>? {
+    func observeEntries<T: Object>() -> Observable<(RealmObservable<T>)>? {
         let realm = RealmProvider.shared.realm
         let entries = realm.objects(T.self)
         Logger.info("Entries type of \(type(of: T.self)) (\(entries.count) count) is available")

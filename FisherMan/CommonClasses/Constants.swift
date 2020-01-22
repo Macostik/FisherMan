@@ -26,6 +26,8 @@ struct Constants {
     static let screenWidth = UIScreen.main.bounds.width
     static let screenHeight = UIScreen.main.bounds.height
     static let mainCollectionViewCell     = "mainCollectionViewCell"
+    static let newsCollectionViewCell     = "newsCollectionViewCell"
     static let serviceID                  = "1fa7ce2d8fde588ac8fc"
     static let localizeNames              = "localizationsShortNames"
+    static let errorCloudImage            = "exclamationmark.icloud"
 }

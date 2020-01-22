@@ -7,10 +7,13 @@
 //
 
 import Foundation
+import RxSwift
+import RxCocoa
 
 final class NewsSceneViewModel: BaseViewModel<NewsModel> {
     
     override func performAction() {
         dependencies.newsService.getAllNews()
+        elements = dependencies.newsService.observeEntries()?.asDriver(onErrorJustReturn: ([], nil))
     }
 }

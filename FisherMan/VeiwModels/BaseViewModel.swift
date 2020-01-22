@@ -11,11 +11,12 @@ import RxSwift
 import RxCocoa
 import Action
 import RealmSwift
+import RxRealm
 
 class BaseViewModel<T> {
 
     public let dependencies: Dependency
-    public var elements: Driver<T>
+    public var elements: Driver<RealmObservable<T>>?
     public let loadError: Driver<Error>
     public let indicatorViewAnimating: Driver<Bool>
     public let loadAction: Action<T, T>
@@ -25,7 +26,6 @@ class BaseViewModel<T> {
     init(dependencies: Dependency) {
         self.dependencies = dependencies
         loadAction = Action { .just($0) }
-        elements = loadAction.elements.asDriver(onErrorDriveWith: .empty())
         indicatorViewAnimating = loadAction.executing.asDriver(onErrorJustReturn: false)
         loadError = loadAction.errors.asDriver(onErrorDriveWith: .empty())
             .flatMap { error -> Driver<Error> in
