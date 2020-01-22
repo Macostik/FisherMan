@@ -9,6 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
+import SDWebImage
 
 class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
     
@@ -29,7 +30,7 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .vertical
         layout.minimumLineSpacing = 10
-        layout.itemSize = CGSize(width: Constants.screenWidth - 40, height: 300)
+        layout.itemSize = CGSize(width: Constants.screenWidth - 40, height: 400)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
@@ -45,15 +46,12 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
     
     override func setupBindings() {
         viewModel?.indicatorViewAnimating.drive(spinner.rx.isAnimating).disposed(by: disposeBag)
-        viewModel?.loadError.map { _ in false }.drive(errorImageView.rx.isHidden).disposed(by: disposeBag)
-        viewModel?.elements?.drive(onNext: { [unowned self] arg in
-            Observable.just(arg.0)
-                .bind(to: self.newsCollectionView.rx
-                    .items(cellIdentifier: Constants.newsCollectionViewCell,
-                           cellType: NewsCollectionViewCell.self)) { _, data, cell in
-                            cell.setupEntry(new: data)
-            }.disposed(by: self.disposeBag)
-        }).disposed(by: disposeBag)
+        viewModel?.loadError.map({ _ in false }).drive(errorImageView.rx.isHidden).disposed(by: disposeBag)
+        viewModel?.elements?.flatMap({ .just($0.0) }).drive(self.newsCollectionView.rx
+            .items(cellIdentifier: Constants.newsCollectionViewCell,
+                   cellType: NewsCollectionViewCell.self)) { _, data, cell in
+                    cell.setupEntry(data)
+        }.disposed(by: self.disposeBag)
     }
 }
 
@@ -62,16 +60,16 @@ class NewsCollectionViewCell: UICollectionViewCell {
     private let titleLabel = specify(UILabel(), {
         $0.numberOfLines = 0
     })
-    private let newsImageView = UIImageView()
+    private let newsImageView = specify(UIImageView(), {
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 16
+    })
     
-    public func setupEntry(new: NewsModel) {
+    public func setupEntry(_ new: NewsModel) {
         add(newsImageView, layoutBlock: { $0.edges() })
         add(titleLabel, layoutBlock: { $0.top(30).leading(20).trailing(20) })
         titleLabel.text = new.title
-        DispatchQueue.main.async {
-            guard let imageData = try? Data(contentsOf: URL(fileURLWithPath: new.previewImageUrl))
-                else { return }
-            self.newsImageView.image = UIImage(data: imageData)
-        }
+        self.newsImageView.sd_setImage(with: URL(string: new.previewImageUrl))
     }
 }

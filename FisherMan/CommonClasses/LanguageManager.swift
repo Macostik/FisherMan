@@ -18,7 +18,7 @@ final class LanguageManager {
     
     static let shared = LanguageManager()
     fileprivate let disposeBag = DisposeBag()
-    public let notifyObservable = BehaviorSubject<Void>(value: ())
+    public let notifyObservable = BehaviorSubject<Localable>(value: .ru)
     
     init() {
         do {
@@ -52,7 +52,7 @@ final class LanguageManager {
                 try realm.write {
                     realm.add(language, update: .modified)
                 }
-                notifyObservable.onNext(())
+                notifyObservable.onNext(locale)
             } catch {}
         }
     }

@@ -10,5 +10,6 @@ target 'FisherMan' do
   pod 'lottie-ios'
   pod 'RxRealm'
   pod 'SwiftyJSON'
+  pod 'SDWebImage'
 
 end
