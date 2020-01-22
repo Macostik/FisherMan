@@ -33,7 +33,7 @@ struct Logger {
         case info = "ℹ️ Info: "
         case error = "🔥 Error: "
         case debug = "🐞 Debug: "
-        case verbose = "📣 Verbose: "
+        case verbose = "👍 Verbose: "
     }
     
     static func debugLog(_ string: @autoclosure () -> String,
@@ -75,7 +75,7 @@ struct Logger {
     static func warrning<T>(_ message: @autoclosure () -> T,
                             filename: String = #file,
                             line: Int = #line) {
-        log(message(), type: .verbose, filename: filename, line: line)
+        log(message(), type: .warning, filename: filename, line: line)
     }
     
     static func info<T>(_ message: @autoclosure () -> T,
@@ -87,6 +87,6 @@ struct Logger {
     static func verbose<T>(_ message: @autoclosure () -> T,
                            filename: String = #file,
                            line: Int = #line) {
-        log(message(), type: .warning, filename: filename, line: line)
+        log(message(), type: .verbose, filename: filename, line: line)
     }
 }

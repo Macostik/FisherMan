@@ -46,7 +46,7 @@ final class LanguageManager {
         didSet {
             Logger.verbose("Set new locale: \(locale.rawValue)")
             do {
-                let realm = try Realm()
+                let realm = RealmProvider.shared.realm
                 let language = LanguageModel()
                 language.locale = locale.rawValue
                 try realm.write {

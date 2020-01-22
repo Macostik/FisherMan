@@ -22,13 +22,10 @@ public class RealmService<C>: RealmServiceType {
     internal let disposeBag = DisposeBag()
     
     public func observeEntries<T: Object>() -> Observable<([T], RxRealm.RealmChangeset?)>? {
-        do {
-            let realm = try Realm()
-            let entries = realm.objects(T.self)
-            Logger.info("Entries type of \(type(of: T.self)) (\(entries.count) count) is available")
-            return Observable.arrayWithChangeset(from: entries)
-        } catch {}
-        return Observable.empty()
+        let realm = RealmProvider.shared.realm
+        let entries = realm.objects(T.self)
+        Logger.info("Entries type of \(type(of: T.self)) (\(entries.count) count) is available")
+        return Observable.arrayWithChangeset(from: entries)
     }
 }
 
@@ -79,13 +76,8 @@ protocol EntryCollection {
 
 extension EntryCollection where Self: Object {
     static func entries() -> [Self] {
-        do {
-            let realm = try Realm()
-            return Array(realm.objects(self))
-        } catch let error {
-            Logger.verbose("\(self) has error: \(error)")
-        }
-        return []
+        let realm = RealmProvider.shared.realm
+        return Array(realm.objects(self))
     }
 }
 

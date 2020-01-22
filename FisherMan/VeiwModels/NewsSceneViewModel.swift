@@ -8,4 +8,9 @@
 
 import Foundation
 
-final class NewsSceneViewModel: BaseViewModel<NewsModel> {}
+final class NewsSceneViewModel: BaseViewModel<NewsModel> {
+    
+    override func performAction() {
+        dependencies.newsService.getAllNews()
+    }
+}

@@ -12,12 +12,15 @@ import RxCocoa
 
 class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
     
+    private let spinner = UIActivityIndicatorView(style: .large)
+    
     override func setupUI() {
-        view.backgroundColor = .blue
+        view.backgroundColor = .white
+        view.add(spinner, layoutBlock: { $0.center() })
     }
     
     override func setupBindings() {
-//        viewModel?.indicatorViewAnimating.drive(<#drive#>),
+        viewModel?.indicatorViewAnimating.drive(spinner.rx.isAnimating).disposed(by: disposeBag)
 //        viewModel?.elements.drive(<#drive#>),
 //        viewModel?.loadError.drive(onNext: {<#drive#>}),
     }

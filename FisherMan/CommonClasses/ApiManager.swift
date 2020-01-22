@@ -62,10 +62,10 @@ enum APIManager: URLRequestConvertible {
             return URL
         }()
         
-        Logger.verbose("REQUEST for \n\t url - \(url)\n\t method - \(method)\n\t parameters - " +
+        Logger.warrning("REQUEST for \n\t url - \(url)\n\t method - \(method)\n\t parameters - " +
             "\(parameters ?? [:])")
         #if DEBUG
-        Logger.verbose("header - \(headers ?? [:])")
+        Logger.warrning("header - \(headers ?? [:])")
         #endif
         
         var urlRequest = URLRequest(url: url)
@@ -145,7 +145,7 @@ enum APIManager: URLRequestConvertible {
                         "\(line)] \(function):\n\t" + errorDescription + errorReason)
                     return Observable.error(error)
                 }
-                Logger.info("RESPONSE by request - \(response.request?.url?.absoluteString ?? "")" +
+                Logger.verbose("RESPONSE by request - \(response.request?.url?.absoluteString ?? "")" +
                     "\n\t [\((file as! NSString).lastPathComponent): \(line)] \(function): " +
                     "RESPONSE - \(response) \n\t\(response.timeline)")
                 let json = JSON(response.result.value ?? NSNull())
@@ -169,7 +169,7 @@ enum APIManager: URLRequestConvertible {
                     return Observable.error( NSError(domain: "Error status",
                                                      code: response.0.statusCode, userInfo: nil))
                 }
-                Logger.info("RESPONSE by request - \(response.0.url?.absoluteString ?? "")" +
+                Logger.verbose("RESPONSE by request - \(response.0.url?.absoluteString ?? "")" +
                     " \n\t [\((file as! NSString).lastPathComponent): \(line)] \(function): " +
                     "RESPONSE - \(response)")
                 return Observable.just(response.1)
@@ -186,7 +186,7 @@ enum APIManager: URLRequestConvertible {
             }
             .share(replay: 1)
             .flatMapLatest { response, string -> RxSwift.Observable<(HTTPURLResponse, String)> in
-                Logger.info("RESPONSE by request - \(response.url?.absoluteString ?? "")" +
+                Logger.verbose("RESPONSE by request - \(response.url?.absoluteString ?? "")" +
                     "\n\t [\((file as! NSString).lastPathComponent): \(line)] \(function): " +
                     "RESPONSE - \(response)")
                 guard 200 ... 299 ~= response.statusCode else {

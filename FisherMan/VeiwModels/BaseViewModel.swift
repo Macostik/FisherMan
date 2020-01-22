@@ -36,5 +36,7 @@ class BaseViewModel<T> {
                     return Driver.empty()
                 }
         }
+        performAction()
     }
+    internal func performAction() {}
 }

@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class SplashService: RealmService<NewsModel> {
+class NewsService: RealmService<NewsModel> {
     
     public func getAllNews(completion: (() -> Void)? = nil) {
         var newsList = [NewsModel]()
@@ -17,7 +17,7 @@ class SplashService: RealmService<NewsModel> {
                             "localizationsShortNames": [Localable.ru.rawValue, Localable.en.rawValue]])
         .json().subscribe(onNext: { json in
             do {
-                let realm = try Realm()
+                let realm = RealmProvider.shared.realm
                 try realm.write {
                     let data = json["items"]
                     if !data.isEmpty {
@@ -25,7 +25,7 @@ class SplashService: RealmService<NewsModel> {
                             let object = realm.create(T.self, value: entity.object, update: .modified)
                             newsList.append(object)
                         }
-                        Logger.verbose("Initiate news were loaded - \(data.count)")
+                        Logger.info("Initiate news were loaded - \(data.count)")
                     }
                 }
                 completion?()
