@@ -1,15 +1,15 @@
 //  
-//  CameraSceneModel.swift
+//  FavoriteModel.swift
 //  FisherMan
 //
-//  Created by Гранченко Юрий on 13.01.2020.
+//  Created by Yura Granchenko on 20.01.2020.
 //  Copyright © 2020 GYS. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-final class CameraSceneModel: Object {
+final class FavoriteModel: Object {
     
     @objc dynamic public var id = 0
     

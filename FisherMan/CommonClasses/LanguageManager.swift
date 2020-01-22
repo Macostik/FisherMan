@@ -22,7 +22,7 @@ final class LanguageManager {
     
     init() {
         do {
-            let realm = try Realm()
+            let realm = RealmProvider.shared.realm
             guard let language = realm.objects(LanguageModel.self).first else {
                 let deviceLocale = Locale.preferredLanguages[0].prefix(2).toString()
                 let language = LanguageModel()

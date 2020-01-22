@@ -10,4 +10,4 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class AdditionalSceneViewModel: BaseViewModel<AdditionalSceneModel> {}
+final class AdditionalSceneViewModel: BaseViewModel<AdditionalModel> {}

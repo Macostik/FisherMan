@@ -1,15 +1,15 @@
 //  
-//  NewsSceneModel.swift
+//  DetailModel.swift
 //  FisherMan
 //
-//  Created by Гранченко Юрий on 13.12.2019.
-//  Copyright © 2019 GYS. All rights reserved.
+//  Created by Yura Granchenko on 20.01.2020.
+//  Copyright © 2020 GYS. All rights reserved.
 //
 
 import UIKit
 import RealmSwift
 
-final class NewsSceneModel: Object {
+final class DetailModel: Object {
     
     @objc dynamic public var id = 0
     

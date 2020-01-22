@@ -9,10 +9,10 @@
 import Foundation
 import RealmSwift
 
-class SplashService: RealmService<NewsSceneModel> {
+class SplashService: RealmService<NewsModel> {
     
     public func getAllNews(completion: (() -> Void)? = nil) {
-        var newsList = [NewsSceneModel]()
+        var newsList = [NewsModel]()
         APIManager.allNews(["serviceId": Constants.serviceID,
                             "localizationsShortNames": [Localable.ru.rawValue, Localable.en.rawValue]])
         .json().subscribe(onNext: { json in

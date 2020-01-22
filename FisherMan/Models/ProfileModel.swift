@@ -1,5 +1,5 @@
 //  
-//  DetailSceneModel.swift
+//  ProfileModel.swift
 //  FisherMan
 //
 //  Created by Yura Granchenko on 20.01.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-final class DetailSceneModel: Object {
+final class ProfileModel: Object {
     
     @objc dynamic public var id = 0
     

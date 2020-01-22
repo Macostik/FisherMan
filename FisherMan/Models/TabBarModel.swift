@@ -1,5 +1,5 @@
 //  
-//  TabBarSceneModel.swift
+//  TabBarModel.swift
 //  FisherMan
 //
 //  Created by Гранченко Юрий on 10.01.2020.
@@ -11,7 +11,7 @@ import RealmSwift
 import RxSwift
 import RxCocoa
 
-enum TabBarSceneModel: String, CaseIterable {
+enum TabBarModel: String, CaseIterable {
     
     case news = "house.fill"
     case search = "magnifyingglass.circle"

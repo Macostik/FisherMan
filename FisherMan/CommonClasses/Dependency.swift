@@ -9,5 +9,6 @@
 import Foundation
 
 class Dependency {
-    let mainNavigationController = InteractionNavigationController()
+    public let mainNavigationController = InteractionNavigationController()
+    public let languageManager = LanguageManager()
 }

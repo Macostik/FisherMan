@@ -1,5 +1,5 @@
 //  
-//  AdditionalSceneModel.swift
+//  AdditionalModel.swift
 //  FisherMan
 //
 //  Created by Yura Granchenko on 20.01.2020.
@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-final class AdditionalSceneModel: Object {
+final class AdditionalModel: Object {
     
     @objc dynamic public var id = 0
     
