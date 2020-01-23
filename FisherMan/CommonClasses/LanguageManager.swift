@@ -18,7 +18,7 @@ final class LanguageManager {
     
     static let shared = LanguageManager()
     fileprivate let disposeBag = DisposeBag()
-    public let notifyObservable = BehaviorSubject<Localable>(value: .ru)
+    public lazy var notifyObservable = BehaviorSubject<Localable>(value: locale)
     
     init() {
         do {

@@ -8,6 +8,12 @@
 
 import Foundation
 import RealmSwift
+import RxSwift
+import RxCocoa
+
+enum EmptyError: Error {
+    case empty
+}
 
 class NewsService: RealmService<NewsModel> {
     
@@ -36,5 +42,35 @@ class NewsService: RealmService<NewsModel> {
         }, onError: { _ in
             completion?()
         }).disposed(by: disposeBag)
+    }
+    
+    @discardableResult public func getOldNews() -> Completable? {
+        return Completable.create { [unowned self] completable in
+            if let minPublishData = T.minPublishDate() {
+                APIManager.oldNews(["serviceId": Constants.serviceID,
+                                    "publicationDate": minPublishData,
+                                    Constants.localizeName: LanguageManager.shared.locale.rawValue])
+                    .json().subscribe(onNext: { json in
+                        do {
+                            let realm = try Realm()
+                            try realm.write {
+                                let data = json["items"]
+                                if !data.isEmpty {
+                                    for entity in data.arrayValue {
+                                        realm.create(T.self, value: entity.object, update: .modified)
+                                    }
+                                    Logger.info("Old news were loaded - \(data.count)")
+                                    completable(.completed)
+                                } else {
+                                    completable(.error(EmptyError.empty))
+                                }
+                            }
+                        } catch {}
+                    }, onError: { error in
+                        completable(.error(error))
+                    }).disposed(by: self.disposeBag)
+            }
+            return Disposables.create {}
+        }
     }
 }

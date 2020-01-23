@@ -13,35 +13,31 @@ import RxCocoa
 final class NewsSceneViewModel: BaseViewModel<NewsModel> {
     
     public var newsListObserver: Observable<[NewsModel]>?
+    public var reachBottomObserver: Observable<Void>? {
+        willSet {
+            newValue?.subscribe(onNext: { [unowned self] _ in
+                self.dependencies.newsService.getOldNews()?.subscribe().disposed(by: self.disposeBag)
+            }).disposed(by: disposeBag)
+            
+        }
+    }
     
     override func performAction() {
         dependencies.newsService.getAllNews()
-        
         elements = dependencies.newsService.observeEntries()?
             .map({ $0.0 }).asDriver(onErrorJustReturn: [NewsModel()])
-        let localeObservable = LanguageManager.shared.notifyObservable
-        newsListObserver = Observable.combineLatest(elements!.asObservable(),
-                                                    localeObservable,
-                                                    resultSelector: { list, locale -> [NewsModel] in
-            return list.filter({ $0.localizationShortName == locale.rawValue })
-        })
-//        elements = dependencies.newsService.observeEntries()?.do(onNext: { list, changes in
-//            list
-//        }).map({ $0.0 }).asDriver(onErrorJustReturn: [NewsModel()])
-        
-//        if let newsEntryObserver = dependencies.newsService.observeEntries() {
-//            let localeObserver = LanguageManager.shared.notifyObservable
-//            elements = Observable
-//                .combineLatest(newsEntryObserver, localeObserver) { news, locale -> [NewsModel]? in
-//                    let newsEntries = news.0 as? [NewsModel]
-//                    return newsEntries?.filter({ $0.localizationShortName == locale.rawValue })
-//            }.asDriver(onErrorJustReturn: [NewsModel()])
-//        }
+        newsListObserver =
+            Observable.combineLatest(elements?.asObservable() ?? .empty(),
+                                     LanguageManager.shared.notifyObservable,
+                                     resultSelector: { list, locale -> [NewsModel] in
+                                        return list.filter({ $0.localizationShortName == locale.rawValue })
+                                            .sorted(by: { $0.publicationDate > $1.publicationDate })
+            })
     }
 }
 
 extension IndexPath {
-  static func fromRow(_ row: Int) -> IndexPath {
+    static func fromRow(_ row: Int) -> IndexPath {
     return IndexPath(row: row, section: 0)
   }
 }

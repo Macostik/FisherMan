@@ -15,7 +15,7 @@ final class ProfileSceneViewModel: BaseViewModel<ProfileModel> {
     public var languageObservable: Observable<Bool>? {
         willSet {
             newValue?.subscribe(onNext: { toggle in
-                LanguageManager.shared.locale = toggle ? .ru : .en
+                LanguageManager.shared.locale = toggle ? .en : .ru
             }).disposed(by: disposeBag)
         }
     }
