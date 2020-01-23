@@ -12,13 +12,19 @@ import RxCocoa
 
 class ProfileSceneViewController: BaseViewController<ProfileSceneViewModel> {
     
+    private let languageSwitch = specify(UISwitch(), {
+        $0.isOn = true
+    })
+    
     override func setupUI() {
-       view.backgroundColor = .green
+        view.backgroundColor = .green
+        view.add(languageSwitch, layoutBlock: { $0.top(30).trailing(30) })
     }
     
     override func setupBindings() {
-//        viewModel?.indicatorViewAnimating.drive(<#drive#>),
-//        viewModel?.elements.drive(<#drive#>),
-//        viewModel?.loadError.drive(onNext: {<#drive#>}),
+        viewModel!.languageObservable = languageSwitch.rx.isOn.changed.asObservable()
+        //        viewModel?.indicatorViewAnimating.drive(<#drive#>),
+        //        viewModel?.elements.drive(<#drive#>),
+        //        viewModel?.loadError.drive(onNext: {<#drive#>}),
     }
 }

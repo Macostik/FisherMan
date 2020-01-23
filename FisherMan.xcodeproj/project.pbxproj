@@ -52,6 +52,7 @@
 		568659F723D75FBA00FBB61C /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F623D75FBA00FBB61C /* LanguageModel.swift */; };
 		568659F923D761E200FBB61C /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659F823D761E200FBB61C /* String+Ext.swift */; };
 		568659FC23D7910C00FBB61C /* Path+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659FB23D7910C00FBB61C /* Path+Ext.swift */; };
+		568659FE23D9EE6600FBB61C /* Reactive+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568659FD23D9EE6600FBB61C /* Reactive+Ext.swift */; };
 		56B9F7E423D59BD200C03F5E /* DetailSceneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E023D59BD200C03F5E /* DetailSceneCoordinator.swift */; };
 		56B9F7E523D59BD200C03F5E /* DetailSceneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E123D59BD200C03F5E /* DetailSceneViewController.swift */; };
 		56B9F7E623D59BD200C03F5E /* DetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56B9F7E223D59BD200C03F5E /* DetailModel.swift */; };
@@ -126,6 +127,7 @@
 		568659F823D761E200FBB61C /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		568659FA23D78D1500FBB61C /* FisherManDEV.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = FisherManDEV.entitlements; sourceTree = "<group>"; };
 		568659FB23D7910C00FBB61C /* Path+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Path+Ext.swift"; sourceTree = "<group>"; };
+		568659FD23D9EE6600FBB61C /* Reactive+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Reactive+Ext.swift"; sourceTree = "<group>"; };
 		56B9F7E023D59BD200C03F5E /* DetailSceneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneCoordinator.swift; sourceTree = "<group>"; };
 		56B9F7E123D59BD200C03F5E /* DetailSceneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailSceneViewController.swift; sourceTree = "<group>"; };
 		56B9F7E223D59BD200C03F5E /* DetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailModel.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				56762AFA238AF5B3000E8501 /* UIView+Ext.swift */,
 				568659F823D761E200FBB61C /* String+Ext.swift */,
 				568659FB23D7910C00FBB61C /* Path+Ext.swift */,
+				568659FD23D9EE6600FBB61C /* Reactive+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -514,6 +517,7 @@
 				4363693423CC655900A620F6 /* CameraSceneViewController.swift in Sources */,
 				43562C6123C8CDAE00996D84 /* TabBarSceneViewController.swift in Sources */,
 				56762AE823872025000E8501 /* BaseViewModel.swift in Sources */,
+				568659FE23D9EE6600FBB61C /* Reactive+Ext.swift in Sources */,
 				56B9F7EC23D59D6600C03F5E /* SearchSceneCoordinator.swift in Sources */,
 				56762AE623872025000E8501 /* ApiManager.swift in Sources */,
 				4363693723CC666000A620F6 /* CameraSceneCoordinator.swift in Sources */,

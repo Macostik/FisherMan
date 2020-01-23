@@ -47,7 +47,7 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
     override func setupBindings() {
         viewModel?.indicatorViewAnimating.drive(spinner.rx.isAnimating).disposed(by: disposeBag)
         viewModel?.loadError.map({ _ in false }).drive(errorImageView.rx.isHidden).disposed(by: disposeBag)
-        viewModel?.elements?.flatMap({ .just($0.0) }).drive(self.newsCollectionView.rx
+        viewModel?.newsListObserver?.bind(to: self.newsCollectionView.rx
             .items(cellIdentifier: Constants.newsCollectionViewCell,
                    cellType: NewsCollectionViewCell.self)) { _, data, cell in
                     cell.setupEntry(data)

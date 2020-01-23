@@ -14,13 +14,20 @@ import RealmSwift
 
 typealias RealmObservable<T> = ([T], RxRealm.RealmChangeset?)
 
+protocol BaseNewsModelType: EntryCollection {
+    var id: String { get }
+    var publicationDate: String { get }
+    var localizationShortName: String { get }
+    static func minPublishDate() -> String?
+    static func lastChangeStateID() -> String?
+}
+
 protocol RealmServiceType {
     associatedtype T
     func observeEntries<T: Object>() -> Observable<(RealmObservable<T>)>?
 }
 
-public class RealmService<C>: RealmServiceType {
-    typealias T = C
+public class RealmService<T>: RealmServiceType {
     internal let disposeBag = DisposeBag()
     
     func observeEntries<T: Object>() -> Observable<(RealmObservable<T>)>? {
@@ -108,5 +115,23 @@ extension Realm {
                 }
             }
         }
+    }
+}
+
+extension BaseNewsModelType where Self: Object {
+    static func minPublishDate() -> String? {
+        let realm = RealmProvider.shared.realm
+        let articles = realm.objects(self)
+        let locale = realm.objects(LanguageModel.self).first?.locale
+        return articles.filter({ $0.localizationShortName == locale })
+            .map({ Int($0.publicationDate) ?? 0 }).min()?.toString()
+    }
+    
+    static func lastChangeStateID() -> String? {
+        let realm = RealmProvider.shared.realm
+        let articles = realm.objects(self)
+        let locale = realm.objects(LanguageModel.self).first?.locale
+        return articles.filter({ $0.localizationShortName == locale })
+            .sorted(by: { Int($0.publicationDate) ?? 0 > Int($1.publicationDate) ?? 0 }).first?.id ?? ""
     }
 }

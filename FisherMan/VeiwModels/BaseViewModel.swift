@@ -16,7 +16,7 @@ import RxRealm
 class BaseViewModel<T> {
 
     public let dependencies: Dependency
-    public var elements: Driver<RealmObservable<T>>?
+    public var elements: Driver<[T]>?
     public let loadError: Driver<Error>
     public let indicatorViewAnimating: Driver<Bool>
     public let loadAction: Action<T, T>

@@ -10,4 +10,14 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class ProfileSceneViewModel: BaseViewModel<ProfileModel> {}
+final class ProfileSceneViewModel: BaseViewModel<ProfileModel> {
+    
+    public var languageObservable: Observable<Bool>? {
+        willSet {
+            newValue?.subscribe(onNext: { toggle in
+                LanguageManager.shared.locale = toggle ? .ru : .en
+            }).disposed(by: disposeBag)
+        }
+    }
+    
+}

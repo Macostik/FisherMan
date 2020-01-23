@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-final class NewsModel: Object {
+final class NewsModel: Object, BaseNewsModelType {
     
     @objc dynamic public var id = ""
     @objc dynamic public var previewType = 1

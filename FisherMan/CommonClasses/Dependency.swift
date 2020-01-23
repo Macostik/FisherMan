@@ -10,6 +10,5 @@ import Foundation
 
 class Dependency {
     public let mainNavigationController = InteractionNavigationController()
-    public let languageManager = LanguageManager()
     public let newsService = NewsService()
 }
