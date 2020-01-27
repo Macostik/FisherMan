@@ -24,8 +24,11 @@ final class NewsSceneViewModel: BaseViewModel<NewsModel> {
     
     override func performAction() {
         dependencies.newsService.getAllNews()
-        elements = dependencies.newsService.observeEntries()?
-            .map({ $0.0 }).asDriver(onErrorJustReturn: [NewsModel()])
+        elements = dependencies.newsService.observeEntries()?.do(onNext: {
+            print (">>deleted - \($0.1?.deleted)<<")
+            print (">>inserted - \($0.1?.inserted)<<")
+            print (">>updated - \($0.1?.updated)<<")
+        }).map({ $0.0 }).asDriver(onErrorJustReturn: [NewsModel()])
         newsListObserver =
             Observable.combineLatest(elements?.asObservable() ?? .empty(),
                                      LanguageManager.shared.notifyObservable,

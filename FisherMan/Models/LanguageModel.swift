@@ -12,7 +12,7 @@ import RealmSwift
 final class LanguageModel: Object {
     
     @objc dynamic public var id = 0
-    @objc dynamic public var locale = "en"
+    @objc dynamic public var  locale = "en"
     
     override static func primaryKey() -> String? {
         return "id"

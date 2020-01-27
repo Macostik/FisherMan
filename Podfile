@@ -5,10 +5,11 @@ target 'FisherMan' do
 
   pod 'RxAlamofire'
   pod 'RxGesture'
+  pod 'RxRealm'
+  pod 'RxDataSources'
   pod 'Action'
   pod 'SwiftLint'
   pod 'lottie-ios'
-  pod 'RxRealm'
   pod 'SwiftyJSON'
   pod 'SDWebImage'
 

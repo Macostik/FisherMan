@@ -10,6 +10,10 @@ import UIKit
 import RxSwift
 import RxCocoa
 import SDWebImage
+import RxDataSources
+
+typealias Section = AnimatableSectionModel<String, NewsModel>
+typealias DataSource = RxCollectionViewSectionedAnimatedDataSource<SectionOfArticles>
 
 class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
     
@@ -40,6 +44,20 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
         return collectionView
     }()
     
+    private lazy var dataSource: DataSource = {
+        let animationConfiguration = AnimationConfiguration(insertAnimation: .automatic,
+                                                            reloadAnimation: .automatic,
+                                                            deleteAnimation: .automatic)
+        return DataSource(animationConfiguration: animationConfiguration,
+                          configureCell: { _, collectionView, indexPath, data in
+                            let cell = collectionView
+                                .dequeueReusableCell(withReuseIdentifier: Constants.newsCollectionViewCell,
+                                                     for: indexPath) as? NewsCollectionViewCell
+                            cell?.setupEntry(data)
+                            return cell ?? UICollectionViewCell()
+        })
+    }()
+    
     override func setupUI() {
         view.backgroundColor = .white
     }
@@ -48,11 +66,10 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
         viewModel?.indicatorViewAnimating.drive(spinner.rx.isAnimating).disposed(by: disposeBag)
         viewModel?.loadError.map({ _ in false }).drive(errorImageView.rx.isHidden).disposed(by: disposeBag)
         viewModel?.reachBottomObserver = newsCollectionView.rx.reachedBottom().asObservable()
-        viewModel?.newsListObserver?.bind(to: self.newsCollectionView.rx
-            .items(cellIdentifier: Constants.newsCollectionViewCell,
-                   cellType: NewsCollectionViewCell.self)) { _, data, cell in
-                    cell.setupEntry(data)
-        }.disposed(by: self.disposeBag)
+        viewModel?.newsListObserver?
+            .map({ [SectionOfArticles(items: $0)] })
+            .bind(to: newsCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
     }
 }
 

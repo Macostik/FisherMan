@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import RxDataSources
 
 final class NewsModel: Object, BaseNewsModelType {
     
@@ -26,5 +27,29 @@ final class NewsModel: Object, BaseNewsModelType {
     
     override static func primaryKey() -> String? {
         return "id"
+    }
+}
+
+extension NewsModel: IdentifiableType {
+    typealias Identity = String
+    var identity: Identity { return id }
+}
+
+func == (lhs: NewsModel, rhs: NewsModel) -> Bool {
+    return lhs.id == rhs.id
+}
+
+struct SectionOfArticles {
+    var items: [NewsModel]
+}
+
+extension SectionOfArticles: AnimatableSectionModelType {
+    typealias Item = NewsModel
+    
+    var identity: String { return "SectionOfArticles" }
+    
+    init(original: SectionOfArticles, items: [NewsModel]) {
+        self = original
+        self.items = items
     }
 }
