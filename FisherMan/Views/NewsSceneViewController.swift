@@ -49,11 +49,11 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
                                                             reloadAnimation: .automatic,
                                                             deleteAnimation: .automatic)
         return DataSource(animationConfiguration: animationConfiguration,
-                          configureCell: { [weak viewModel] _, collectionView, indexPath, data in
+                          configureCell: {  _, collectionView, indexPath, data in
                             let cell = collectionView
                                 .dequeueReusableCell(withReuseIdentifier: Constants.newsCollectionViewCell,
                                                      for: indexPath) as? NewsCollectionViewCell
-                            cell?.setupEntry(viewModel, data: data, indexPath: indexPath)
+                            cell?.setupEntry(data)
                             return cell ?? UICollectionViewCell()
         })
     }()
@@ -68,6 +68,9 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
         viewModel?.reachBottomObserver = newsCollectionView.rx.reachedBottom().asObservable()
         viewModel?.items?.map({ [SectionOfArticles(items: $0)] })
             .bind(to: newsCollectionView.rx.items(dataSource: dataSource))
+            .disposed(by: disposeBag)
+        newsCollectionView.rx.itemSelected
+            .bind(to: viewModel!.deleteObservable)
             .disposed(by: disposeBag)
     }
 }
@@ -85,13 +88,10 @@ class NewsCollectionViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 16
     })
     
-    public func setupEntry(_ viewModel: NewsSceneViewModel?, data: NewsModel, indexPath: IndexPath) {
+    public func setupEntry(_ data: NewsModel) {
         add(newsImageView, layoutBlock: { $0.edges() })
         add(titleLabel, layoutBlock: { $0.top(30).leading(20).trailing(20) })
         titleLabel.text = data.title
         self.newsImageView.sd_setImage(with: URL(string: data.previewImageUrl))
-        rx.longPressGesture().when(.began).map({ _ in indexPath })
-            .bind(to: viewModel!.deleteObservable)
-            .disposed(by: disposeBag)
     }
 }

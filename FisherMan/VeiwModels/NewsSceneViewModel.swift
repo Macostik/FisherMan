@@ -39,39 +39,26 @@ final class NewsSceneViewModel: BaseViewModel<NewsModel> {
             case . newsMarkedForDeletion(let new):
                 return news.filter { $0 != new }
             case .collectionRefreshed(withNews: let news):
-                return news.filter({ $0.localizationShortName == LanguageManager.shared.locale.rawValue })
-                    .sorted(by: { $0.publicationDate > $1.publicationDate })
+                return news
             }
-        })
+        }).map { $0.sorted(by: { $0.publicationDate > $1.publicationDate })}
         
-        elements?.map { new -> NewsCollectionAction in return .collectionRefreshed(withNews: new) }
-            .drive(collectionActions)
+        Observable.combineLatest(elements?.asObservable() ?? .empty(),
+                                 LanguageManager.shared.notifyObservable,
+                                 resultSelector: { list, locale -> [NewsModel] in
+                                    return list.filter({ $0.localizationShortName == locale.rawValue })
+        }).map { new -> NewsCollectionAction in return .collectionRefreshed(withNews: new) }
+            .bind(to: collectionActions)
             .disposed(by: disposeBag)
         
         let newsMarkedForDeletion =  deleteObservable
-            .withLatestFrom(items!) { index, items in return items[index.row] }
+            .withLatestFrom(items!) { index, items -> NewsModel in
+                return items[index.row] }
             .share()
         
         newsMarkedForDeletion
             .map { new -> NewsCollectionAction in return .newsMarkedForDeletion(new) }
             .bind(to: collectionActions)
             .disposed(by: disposeBag)
-    }
-}
-
-
-extension IndexPath {
-    static func fromRow(_ row: Int) -> IndexPath {
-    return IndexPath(row: row, section: 0)
-  }
-}
-
-extension UICollectionView {
-    func applyChanges(deletions: [Int], insertions: [Int], updates: [Int]) {
-        performBatchUpdates({
-            insertItems(at: insertions.map(IndexPath.fromRow))
-            deleteItems(at: deletions.map(IndexPath.fromRow))
-            reloadItems(at: updates.map(IndexPath.fromRow))
-        })
     }
 }
