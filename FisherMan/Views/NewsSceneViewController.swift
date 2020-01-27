@@ -49,11 +49,11 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
                                                             reloadAnimation: .automatic,
                                                             deleteAnimation: .automatic)
         return DataSource(animationConfiguration: animationConfiguration,
-                          configureCell: { _, collectionView, indexPath, data in
+                          configureCell: { [weak viewModel] _, collectionView, indexPath, data in
                             let cell = collectionView
                                 .dequeueReusableCell(withReuseIdentifier: Constants.newsCollectionViewCell,
                                                      for: indexPath) as? NewsCollectionViewCell
-                            cell?.setupEntry(data)
+                            cell?.setupEntry(viewModel, data: data, indexPath: indexPath)
                             return cell ?? UICollectionViewCell()
         })
     }()
@@ -66,14 +66,15 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
         viewModel?.indicatorViewAnimating.drive(spinner.rx.isAnimating).disposed(by: disposeBag)
         viewModel?.loadError.map({ _ in false }).drive(errorImageView.rx.isHidden).disposed(by: disposeBag)
         viewModel?.reachBottomObserver = newsCollectionView.rx.reachedBottom().asObservable()
-        viewModel?.newsListObserver?
-            .map({ [SectionOfArticles(items: $0)] })
+        viewModel?.items?.map({ [SectionOfArticles(items: $0)] })
             .bind(to: newsCollectionView.rx.items(dataSource: dataSource))
             .disposed(by: disposeBag)
     }
 }
 
 class NewsCollectionViewCell: UICollectionViewCell {
+    
+    private let disposeBag = DisposeBag()
     
     private let titleLabel = specify(UILabel(), {
         $0.numberOfLines = 0
@@ -84,10 +85,13 @@ class NewsCollectionViewCell: UICollectionViewCell {
         $0.layer.cornerRadius = 16
     })
     
-    public func setupEntry(_ new: NewsModel) {
+    public func setupEntry(_ viewModel: NewsSceneViewModel?, data: NewsModel, indexPath: IndexPath) {
         add(newsImageView, layoutBlock: { $0.edges() })
         add(titleLabel, layoutBlock: { $0.top(30).leading(20).trailing(20) })
-        titleLabel.text = new.title
-        self.newsImageView.sd_setImage(with: URL(string: new.previewImageUrl))
+        titleLabel.text = data.title
+        self.newsImageView.sd_setImage(with: URL(string: data.previewImageUrl))
+        rx.longPressGesture().when(.began).map({ _ in indexPath })
+            .bind(to: viewModel!.deleteObservable)
+            .disposed(by: disposeBag)
     }
 }

@@ -10,9 +10,14 @@ import Foundation
 import RxSwift
 import RxCocoa
 
+enum NewsCollectionAction {
+    case collectionRefreshed(withNews: [NewsModel])
+    case newsMarkedForDeletion(_ book: NewsModel)
+}
+
 final class NewsSceneViewModel: BaseViewModel<NewsModel> {
     
-    public var newsListObserver: Observable<[NewsModel]>?
+    public var items: Observable<[NewsModel]>?
     public var reachBottomObserver: Observable<Void>? {
         willSet {
             newValue?.subscribe(onNext: { [unowned self] _ in
@@ -21,23 +26,39 @@ final class NewsSceneViewModel: BaseViewModel<NewsModel> {
             
         }
     }
+    public var deleteObservable = PublishRelay<IndexPath>()
+    private let collectionActions = ReplaySubject<NewsCollectionAction>.create(bufferSize: 1)
     
     override func performAction() {
         dependencies.newsService.getAllNews()
-        elements = dependencies.newsService.observeEntries()?.do(onNext: {
-            print (">>deleted - \($0.1?.deleted)<<")
-            print (">>inserted - \($0.1?.inserted)<<")
-            print (">>updated - \($0.1?.updated)<<")
-        }).map({ $0.0 }).asDriver(onErrorJustReturn: [NewsModel()])
-        newsListObserver =
-            Observable.combineLatest(elements?.asObservable() ?? .empty(),
-                                     LanguageManager.shared.notifyObservable,
-                                     resultSelector: { list, locale -> [NewsModel] in
-                                        return list.filter({ $0.localizationShortName == locale.rawValue })
-                                            .sorted(by: { $0.publicationDate > $1.publicationDate })
-            })
+        elements = dependencies.newsService.observeEntries()?
+            .map({ $0.0 }).asDriver(onErrorJustReturn: [NewsModel()])
+        
+        items = collectionActions.scan([], accumulator: { news, action -> [NewsModel] in
+            switch action {
+            case . newsMarkedForDeletion(let new):
+                return news.filter { $0 != new }
+            case .collectionRefreshed(withNews: let news):
+                return news.filter({ $0.localizationShortName == LanguageManager.shared.locale.rawValue })
+                    .sorted(by: { $0.publicationDate > $1.publicationDate })
+            }
+        })
+        
+        elements?.map { new -> NewsCollectionAction in return .collectionRefreshed(withNews: new) }
+            .drive(collectionActions)
+            .disposed(by: disposeBag)
+        
+        let newsMarkedForDeletion =  deleteObservable
+            .withLatestFrom(items!) { index, items in return items[index.row] }
+            .share()
+        
+        newsMarkedForDeletion
+            .map { new -> NewsCollectionAction in return .newsMarkedForDeletion(new) }
+            .bind(to: collectionActions)
+            .disposed(by: disposeBag)
     }
 }
+
 
 extension IndexPath {
     static func fromRow(_ row: Int) -> IndexPath {
