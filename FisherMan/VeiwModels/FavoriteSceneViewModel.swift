@@ -10,4 +10,9 @@ import Foundation
 import RxSwift
 import RxCocoa
 
-final class FavoriteSceneViewModel: BaseViewModel<FavoriteModel> {}
+final class FavoriteSceneViewModel: BaseViewModel<FavoriteModel> {
+    
+    override func performAction() {
+        dependencies.flickrService.getSearchImages()
+    }
+}

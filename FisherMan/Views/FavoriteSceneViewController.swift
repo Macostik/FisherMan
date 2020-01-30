@@ -45,22 +45,21 @@ class FavoriteSceneViewController: BaseViewController<FavoriteSceneViewModel> {
         }
         return layout
     }()
-    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, Int> = {
+    private lazy var dataSource: UICollectionViewDiffableDataSource<Section, FavoriteModel> = {
         let dataSource = UICollectionViewDiffableDataSource
-            <Section, Int>(collectionView: self.favoriteGrid) { collectionView, indexPath, identifier in
+            <Section, FavoriteModel>(collectionView: self.favoriteGrid) { collectionView, indexPath, entry in
                 guard let cell = collectionView.dequeueReusableCell(
                     withReuseIdentifier: FavoriteCell.identifier,
                     for: indexPath) as? FavoriteCell else { fatalError("Cannot create new cell") }
-                
-                cell.setupEntry(identifier)
+                cell.setupEntry(entry)
                 return cell
         }
         return dataSource
     }()
-    private let snapShot: NSDiffableDataSourceSnapshot<Section, Int> = {
-        var snapshot = NSDiffableDataSourceSnapshot<Section, Int>()
+    private let snapShot: NSDiffableDataSourceSnapshot<Section, FavoriteModel> = {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, FavoriteModel>()
         snapshot.appendSections([Section.main])
-        snapshot.appendItems(Array(0..<100))
+        snapshot.appendItems(FavoriteModel.entries())
         return snapshot
     }()
     
@@ -78,14 +77,12 @@ class FavoriteSceneViewController: BaseViewController<FavoriteSceneViewModel> {
 
 final class FavoriteCell: UICollectionViewCell, CellIdentifierable {
     
-    let titleLabel = specify(UILabel()) {
-        $0.textAlignment = .center
+    let imageView = specify(UIImageView()) {
+        $0.contentMode = .scaleAspectFill
         
     }
-    public func setupEntry(_ entry: Int) {
-        add(titleLabel, layoutBlock: { $0.edges() })
-        titleLabel.text = "\(entry)"
-        layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 0.5
+    public func setupEntry(_ entry: FavoriteModel) {
+        add(imageView, layoutBlock: { $0.edges() })
+        imageView.sd_setImage(with: entry.concatURL)
     }
 }

@@ -19,7 +19,8 @@ enum APIManager: URLRequestConvertible {
     
     case allNews([String: Any]),
     newNews([String: Any]),
-    oldNews([String: Any])
+    oldNews([String: Any]),
+    searchImages([String: Any])
     
     public func asURLRequest() throws -> URLRequest {
         
@@ -30,7 +31,8 @@ enum APIManager: URLRequestConvertible {
             switch self {
             case .allNews,
                  .newNews,
-                 .oldNews:
+                 .oldNews,
+                 .searchImages:
                 return .get
             }
         }
@@ -39,12 +41,14 @@ enum APIManager: URLRequestConvertible {
             switch self {
             case .allNews(let parameters),
                  .newNews(let parameters),
-                 .oldNews(let parameters):
+                 .oldNews(let parameters),
+                 .searchImages(let parameters):
                 return parameters
             }
         }()
 
         let url: URL = {
+            var URL = Foundation.URL(string: Constants.baseURL)!
             let query: String?
             switch self {
             case .allNews:
@@ -53,9 +57,11 @@ enum APIManager: URLRequestConvertible {
                 query = "get-updated-news"
             case .oldNews:
                 query = "get-previous-news"
+            case .searchImages:
+                URL = Foundation.URL(string: Constants.flickrURL)!
+                query = nil
             }
             
-            var URL = Foundation.URL(string: Constants.baseURL)!
             if let query = query {
                 URL = URL.appendingPathComponent(query)
             }

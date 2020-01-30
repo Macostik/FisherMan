@@ -11,4 +11,5 @@ import Foundation
 class Dependency {
     public let mainNavigationController = InteractionNavigationController()
     public let newsService = NewsService()
+    public let flickrService = FlickrService()
 }
