@@ -25,7 +25,7 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
         collectionView.bounces = false
         collectionView.contentInsetAdjustmentBehavior = .never
         collectionView.register(MainCollectionViewCell.self,
-                                forCellWithReuseIdentifier: Constants.mainCollectionViewCell)
+                                forCellWithReuseIdentifier: MainCollectionViewCell.identifier)
         return collectionView
     }()
     
@@ -35,14 +35,14 @@ class MainScreenViewController: BaseViewController<MainSceneViewModel> {
     
     override func setupBindings() {
         viewModel?.items?.asObservable()
-            .bind(to: mainCollectionView.rx.items(cellIdentifier: Constants.mainCollectionViewCell,
+            .bind(to: mainCollectionView.rx.items(cellIdentifier: MainCollectionViewCell.identifier,
                                                   cellType: MainCollectionViewCell.self)) { _, data, cell in
                                                     cell.setupEntry(data)
         }.disposed(by: disposeBag)
     }
 }
 
-class MainCollectionViewCell: UICollectionViewCell {
+class MainCollectionViewCell: UICollectionViewCell, CellIdentifierable {
     
     public func setupEntry(_ entry: UIViewController) {
         add(entry.view, layoutBlock: { $0.edges() })

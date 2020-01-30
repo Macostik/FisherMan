@@ -39,7 +39,7 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
         collectionView.backgroundColor = .clear
         collectionView.showsVerticalScrollIndicator = false
         collectionView.register(NewsCollectionViewCell.self,
-                                forCellWithReuseIdentifier: Constants.newsCollectionViewCell)
+                                forCellWithReuseIdentifier: NewsCollectionViewCell.identifier)
         self.view.add(collectionView, layoutBlock: { $0.edges() })
         return collectionView
     }()
@@ -51,7 +51,7 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
         return DataSource(animationConfiguration: animationConfiguration,
                           configureCell: {  _, collectionView, indexPath, data in
                             let cell = collectionView
-                                .dequeueReusableCell(withReuseIdentifier: Constants.newsCollectionViewCell,
+                                .dequeueReusableCell(withReuseIdentifier: NewsCollectionViewCell.identifier,
                                                      for: indexPath) as? NewsCollectionViewCell
                             cell?.setupEntry(data)
                             return cell ?? UICollectionViewCell()
@@ -75,7 +75,7 @@ class NewsSceneViewController: BaseViewController<NewsSceneViewModel> {
     }
 }
 
-class NewsCollectionViewCell: UICollectionViewCell {
+class NewsCollectionViewCell: UICollectionViewCell, CellIdentifierable {
     
     private let disposeBag = DisposeBag()
     

@@ -108,3 +108,13 @@ class BaseTabBarController<C>: BaseSceneCoordinator<UINavigationController> {
         return Observable<UINavigationController>.just(navigationController)
     }
 }
+
+protocol CellIdentifierable {
+    static var identifier: String { get }
+}
+
+extension CellIdentifierable where Self: UICollectionViewCell {
+    static var identifier: String {
+        return NSStringFromClass(Self.self)
+    }
+}

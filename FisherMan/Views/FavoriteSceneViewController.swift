@@ -21,17 +21,17 @@ class FavoriteSceneViewController: BaseViewController<FavoriteSceneViewModel> {
                                  collectionViewLayout: self.collectionViewLayout)) {
                                     $0.backgroundColor = .systemBackground
                                     $0.register(FavoriteCell.self,
-                                                forCellWithReuseIdentifier: FavoriteCell.reuseIdentifier)
+                                                forCellWithReuseIdentifier: FavoriteCell.identifier)
     }
     private lazy var collectionViewLayout: UICollectionViewLayout = {
         let layout = UICollectionViewCompositionalLayout { _, _ in
-            let leadingSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+            let leadingSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.75),
                                                      heightDimension: .fractionalHeight(1.0))
             let leadingItem = NSCollectionLayoutItem(layoutSize: leadingSize)
             let trailingSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0),
                                                       heightDimension: .fractionalHeight(1.0))
             let trailingItem = NSCollectionLayoutItem(layoutSize: trailingSize)
-            let trailingGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.5),
+            let trailingGroupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(0.25),
                                                            heightDimension: .fractionalHeight(1.0))
             let trailingGroup = NSCollectionLayoutGroup.vertical(layoutSize: trailingGroupSize,
                                                                  subitem: trailingItem,
@@ -49,7 +49,7 @@ class FavoriteSceneViewController: BaseViewController<FavoriteSceneViewModel> {
         let dataSource = UICollectionViewDiffableDataSource
             <Section, Int>(collectionView: self.favoriteGrid) { collectionView, indexPath, identifier in
                 guard let cell = collectionView.dequeueReusableCell(
-                    withReuseIdentifier: FavoriteCell.reuseIdentifier,
+                    withReuseIdentifier: FavoriteCell.identifier,
                     for: indexPath) as? FavoriteCell else { fatalError("Cannot create new cell") }
                 
                 cell.setupEntry(identifier)
@@ -65,7 +65,6 @@ class FavoriteSceneViewController: BaseViewController<FavoriteSceneViewModel> {
     }()
     
     override func setupUI() {
-        view.backgroundColor = .systemBackground
         view.add(favoriteGrid, layoutBlock: { $0.edges() })
         dataSource.apply(snapShot, animatingDifferences: false)
     }
@@ -77,8 +76,7 @@ class FavoriteSceneViewController: BaseViewController<FavoriteSceneViewModel> {
     }
 }
 
-final class FavoriteCell: UICollectionViewCell {
-    static let reuseIdentifier = NSStringFromClass(FavoriteCell.self)
+final class FavoriteCell: UICollectionViewCell, CellIdentifierable {
     
     let titleLabel = specify(UILabel()) {
         $0.textAlignment = .center
@@ -88,6 +86,6 @@ final class FavoriteCell: UICollectionViewCell {
         add(titleLabel, layoutBlock: { $0.edges() })
         titleLabel.text = "\(entry)"
         layer.borderColor = UIColor.black.cgColor
-        layer.borderWidth = 1.0
+        layer.borderWidth = 0.5
     }
 }
