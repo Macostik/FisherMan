@@ -21,3 +21,4 @@ class FavoriteSceneCoordinator: BaseTabBarController<FavoriteSceneViewModel> {
     //        return coordinate(to: <#Class#>Coordinator)
     //    }}
 }
+
